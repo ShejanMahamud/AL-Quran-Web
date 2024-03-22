@@ -19,7 +19,7 @@ useEffect(()=>{
 },[theme])
 
   return (
-    <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-20`}>
+    <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-5 lg:px-20`}>
         <div className='flex items-center gap-2'>
             <div className='bg-[#32B7C5] h-14 w-14 rounded-xl flex items-center justify-center'>
             <img src="https://i.ibb.co/Kr4HN1m/quran.png" alt="quran.png" className='w-8'/>

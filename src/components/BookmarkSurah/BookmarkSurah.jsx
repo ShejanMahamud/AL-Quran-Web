@@ -3,18 +3,18 @@ import { GoDotFill } from "react-icons/go";
 import { LuBox } from "react-icons/lu";
 import { useNavigate } from 'react-router-dom';
 
-const Surah = ({surah}) => {
+const BookmarkSurah = ({surah}) => {
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const handleSurahDetails = () => {
-    navigate(`/surah/${number}`);
-}
+    const handleBookmarkSurahDetails = () => {
+        navigate(`/surah/${number}`);
+    }
 
-const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;
+    const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;
 
   return (
-   <div onClick={handleSurahDetails} className='border border-gray-700 hover:border-[#32B7C5] rounded-xl w-full'>
+    <div onClick={handleBookmarkSurahDetails} className='border border-gray-700 rounded-xl w-full hover:border-[#32B7C5]'>
 <div className='group hover:bg-[#32B7C5] hover:bg-opacity-5 w-full flex items-center gap-5 px-5 py-5 rounded-xl'>
 <div className=" flex items-center justify-center font-poppins">
         <div className=''>
@@ -42,8 +42,7 @@ const {name,englishName,revelationType,englishNameTranslation,number,numberOfAya
     <p className='font-bold text-sm font-readex-pro'>{name}</p>
 </div>
         </div>
-
   )
 }
 
-export default Surah
+export default BookmarkSurah

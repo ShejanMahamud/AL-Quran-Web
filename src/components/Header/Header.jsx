@@ -10,7 +10,7 @@ const [searchText, setSearchText] = useState('');
     }
 
   return (
-    <header className={`bg-[url('https://i.ibb.co/C0CzNRC/ashkan-forouzani-sfms-MZ7ez-Xw-unsplash-1.jpg')] w-full h-full bg-no-repeat bg-cover bg-center py-10 *:mb-10`}>
+    <header className={`bg-[url('https://i.ibb.co/C0CzNRC/ashkan-forouzani-sfms-MZ7ez-Xw-unsplash-1.jpg')] w-full h-full bg-no-repeat bg-cover bg-center py-10 *:mb-10 mb-10`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
             <img src="https://i.ibb.co/HHPSKzM/logo.png" alt="logo.svg" className='w-20'/>
             <div className='flex items-start flex-col text-white'>
@@ -21,7 +21,7 @@ const [searchText, setSearchText] = useState('');
 
         {/* <button onClick={isDarkMode} className='bg-white p-3'></button> */}
 
-        <div className='flex items-center justify-between bg-[#28333F] rounded-lg w-[40%] mx-auto px-5 py-3 shadow-lg'>
+        <div className='flex items-center justify-between bg-[#28333F] rounded-lg w-[90%] lg:w-[40%] mx-auto px-5 py-3 shadow-lg'>
             <input type="text" className='bg-transparent focus:outline-none' placeholder='Search Surah, Ayat, Juds ...' onChange={getSearchText}/>
             <Link to={`/surah/${searchText}`}><button><IoSearch /></button></Link>
         </div>
@@ -36,7 +36,7 @@ const [searchText, setSearchText] = useState('');
         </div> */}
 
 
-        <div className='w-[80%] mx-auto font-poppins flex items-center gap-5 justify-center'>
+        {/* <div className='w-[80%] mx-auto font-poppins flex items-center gap-5 justify-center'>
             <button className={`bg-transparent rounded-2xl flex items-center text-base text-white gap-2 font-medium border border-white px-5 py-3`}>
             <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5.83337 1.76172V19.7617M9.83337 5.76172H11.8334M9.83337 9.76172H11.8334M2.83337 1.76172H13.8334C14.3638 1.76172 14.8725 1.97243 15.2476 2.34751C15.6227 2.72258 15.8334 3.23129 15.8334 3.76172V15.7617C15.8334 16.2922 15.6227 16.8009 15.2476 17.1759C14.8725 17.551 14.3638 17.7617 13.8334 17.7617H2.83337C2.56816 17.7617 2.3138 17.6564 2.12627 17.4688C1.93873 17.2813 1.83337 17.0269 1.83337 16.7617V2.76172C1.83337 2.4965 1.93873 2.24215 2.12627 2.05461C2.3138 1.86708 2.56816 1.76172 2.83337 1.76172Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -64,7 +64,7 @@ const [searchText, setSearchText] = useState('');
 </svg>
 
             </button>
-        </div>
+        </div> */}
     </header>
   )
 }
