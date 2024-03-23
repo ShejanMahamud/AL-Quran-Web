@@ -10,7 +10,7 @@ import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
 
 const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
   const { number, text, audio,numberInSurah } = arbiAyah;
-
+  const [isLoading, setIsLoading] = useState(false);
   const arabicNumber = number.toLocaleString('ar-EG');
   // State to track whether audio is playing or not
   const [isPlaying, setIsPlaying] = useState(false);
@@ -66,13 +66,20 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
   };
 
   const handleTafsir = () => {
-    navigate(`/tafsir/${surahNumber}/${numberInSurah}`)
-  }
+    setIsLoading(true); // Show loader
+
+    // Delay navigation by 2 seconds (2000 milliseconds)
+    setTimeout(() => {
+      setIsLoading(false); // Hide loader
+      navigate(`/tafsir/${surahNumber}/${numberInSurah}`);
+    }, 2000);
+  };
 
   return (
     <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5">
       <div className=''>
-        <h1 className=' text-sm lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider' id='bangla'>{banglaAyah.text}</h1>
+                 
+        <h1 className='text-base lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider' id='bangla'>{banglaAyah.text}</h1>
         <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishAyah.text}</span>
         <div className='flex  items-center gap-5 mt-5'>
           <button onClick={handleAudio}>
@@ -100,7 +107,13 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
           <button><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
             data-tooltip-content="Share"
             data-tooltip-place="top" /></button>
+            
         </div>
+        {
+                    isLoading && <div className='w-full flex justify-center my-3'>
+                    <span className="loading loading-spinner text-info loading-lg"></span>
+                    </div>
+                }
       </div>
 
       <div className='lg:text-right flex gap-3 w-full lg:justify-end justify-center text-center'>

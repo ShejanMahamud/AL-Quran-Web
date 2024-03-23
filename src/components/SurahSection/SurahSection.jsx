@@ -19,9 +19,15 @@ const SurahSection = ({ handleSurahClick }) => {
     useEffect(() => {
         fetch('https://api.alquran.cloud/v1/meta')
             .then(res => res.json())
-            .then(data => setSurahs(data.data.surahs.references));
-            setLoading(false)
+            .then(data => {
+                // Simulate a delay of 2 seconds
+                setTimeout(() => {
+                    setSurahs(data.data.surahs.references);
+                    setLoading(false);
+                }, 2000);
+            });
     }, []);
+
 
     useEffect(() => {
         const bookmarkedSurahLS = getBookMarkSurahFromLocalStorage();
@@ -70,7 +76,7 @@ const SurahSection = ({ handleSurahClick }) => {
         <main className='w-[90%] mx-auto pb-20'>
             
             <div className='group'>
-                <div className='mb-5'>
+                <div className='my-5'>
                     <button onClick={() => setViewMode('Ayah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5 `}>BookMarked Ayats</button>
                     <button onClick={() => setViewMode('Surah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5`}>BookMarked Surah</button>
                 </div>
@@ -112,7 +118,7 @@ const SurahSection = ({ handleSurahClick }) => {
             
             <div className='w-full grid lg:grid-cols-3 grid-cols-1 row-auto items-center justify-between gap-6 mt-20'>
              {
-                    loading && <div className='w-full flex justify-center'>
+                    loading && <div className='w-full flex justify-center my-3'>
                     <span className="loading loading-spinner text-info loading-lg"></span>
                     </div>
                 }

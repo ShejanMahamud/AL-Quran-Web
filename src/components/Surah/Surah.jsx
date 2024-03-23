@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GoDotFill } from "react-icons/go";
 import { LuBox } from "react-icons/lu";
 import { useNavigate } from 'react-router-dom';
@@ -9,16 +9,14 @@ const Surah = ({surah}) => {
 const navigate = useNavigate();
 
 const handleSurahDetails = () => {
-        setIsLoading(true);
-    navigate(`/surah/${number}`);
-}
-
-useEffect(() => {
-        // Hide loader when navigation is complete
-        return () => {
-            setIsLoading(false);
-        };
-    }, []);
+        setIsLoading(true); // Show loader
+    
+        // Delay navigation by 2 seconds (2000 milliseconds)
+        setTimeout(() => {
+          setIsLoading(false); // Hide loader
+          navigate(`/surah/${number}`);
+        }, 2000);
+      };
 
 const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;
 
