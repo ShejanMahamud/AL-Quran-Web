@@ -103,7 +103,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
         </div>
       </div>
 
-      <div className='text-right flex gap-3 w-full justify-end'>
+      <div className='lg:text-right flex gap-3 w-full lg:justify-end justify-center text-center'>
       <span className='text-2xl'>{arabicNumber}</span>
         <h1 className='lg:text-3xl text-2xl font-noto-naskh-arabic text-white'>{text}</h1>
       </div>
