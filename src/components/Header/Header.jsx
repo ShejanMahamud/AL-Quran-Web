@@ -10,7 +10,7 @@ const [searchText, setSearchText] = useState('');
     }
 
   return (
-    <header className={`bg-[url('https://i.ibb.co/C0CzNRC/ashkan-forouzani-sfms-MZ7ez-Xw-unsplash-1.jpg')] w-full h-[350px] bg-no-repeat bg-cover bg-center py-10 *:mb-10 mb-10`}>
+    <header className={`bg-[url('https://i.ibb.co/7p08xj3/image.webp')] w-full h-[400px] bg-no-repeat bg-cover bg-center py-10 *:mb-10 mb-10`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
             <img src="https://i.ibb.co/HHPSKzM/logo.png" alt="logo.svg" className='w-20'/>
             <div className='flex items-start flex-col text-white'>
