@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoDotFill } from "react-icons/go";
 import { LuBox } from "react-icons/lu";
 import { useNavigate } from 'react-router-dom';
 
 const Surah = ({surah}) => {
 
+        const [isLoading, setIsLoading] = useState(false);
 const navigate = useNavigate();
 
 const handleSurahDetails = () => {
+        setIsLoading(true);
     navigate(`/surah/${number}`);
 }
+
+useEffect(() => {
+        // Hide loader when navigation is complete
+        return () => {
+            setIsLoading(false);
+        };
+    }, []);
 
 const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;
 
   return (
    <div onClick={handleSurahDetails} className='border border-gray-700 hover:border-[#32B7C5] rounded-xl w-full'>
+        {
+                isLoading && <div className='w-full flex justify-center absolute right-0 left-0'>
+                <span className="loading loading-spinner text-info loading-lg"></span>
+                </div>
+            }
 <div className='group hover:bg-[#32B7C5] hover:bg-opacity-5 w-full flex items-center gap-5 px-5 py-5 rounded-xl'>
 <div className=" flex items-center justify-center font-poppins">
         <div className=''>

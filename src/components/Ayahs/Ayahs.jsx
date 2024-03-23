@@ -2,17 +2,21 @@ import React, { useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import { FaBookOpen, FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons/fa";
 import { IoCopy } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
 import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
 
-const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
-  const { number, text, audio } = arbiAyah;
+const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
+  const { number, text, audio,numberInSurah } = arbiAyah;
+
   const arabicNumber = number.toLocaleString('ar-EG');
   // State to track whether audio is playing or not
   const [isPlaying, setIsPlaying] = useState(false);
-  
+
+  const navigate = useNavigate();
+
   const [copy, setCopy] = useState("Copy Ayah");
 
   // Ref to access the audio element
@@ -61,10 +65,14 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
       })
   };
 
+  const handleTafsir = () => {
+    navigate(`/tafsir/${surahNumber}/${numberInSurah}`)
+  }
+
   return (
     <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5">
       <div className=''>
-        <h1 className=' text-sm lg:text-xl font-bold text-white mb-3' id='bangla'>{banglaAyah.text}</h1>
+        <h1 className=' text-sm lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider' id='bangla'>{banglaAyah.text}</h1>
         <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishAyah.text}</span>
         <div className='flex  items-center gap-5 mt-5'>
           <button onClick={handleAudio}>
@@ -84,7 +92,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
           <button onClick={copyCode}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
             data-tooltip-content={copy}
             data-tooltip-place="top" /></button>
-          <button>
+          <button onClick={handleTafsir}>
             <FaBookOpen className='text-[#32B7C5] focus:outline-none' data-tooltip-id="tafsir"
               data-tooltip-content="Tafsir"
               data-tooltip-place="top" />
@@ -95,7 +103,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
         </div>
       </div>
 
-      <div className='text-right flex gap-3'>
+      <div className='text-right flex gap-3 w-full justify-end'>
       <span className='text-2xl'>{arabicNumber}</span>
         <h1 className='lg:text-3xl text-2xl font-noto-naskh-arabic text-white'>{text}</h1>
       </div>

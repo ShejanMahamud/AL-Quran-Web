@@ -11,6 +11,8 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Home from "./components/Home/Home";
 import SurahApp from "./components/SurahApp/SurahApp";
 import SurahDetails from "./components/SurahDetails/SurahDetails";
+import TafsirApp from "./components/TafsirApp/TafsirApp";
+import TafsirDetails from "./components/TafsirDetails/TafsirDetails";
 import './index.css';
 
 const router = createBrowserRouter([
@@ -54,6 +56,33 @@ const router = createBrowserRouter([
     element: <Ayah></Ayah>,
     errorElement: <ErrorPage></ErrorPage>
   },
+    ]
+  },
+  {
+    path: '/tafsir/:surahNumber/:ayahNumber',
+    element: <TafsirApp></TafsirApp>,
+    children: [
+      {
+        path: '/tafsir/:surahNumber/:ayahNumber',
+        loader: async ({params}) => {
+          try {
+          const [surahDetails, surahAudio, surahTafsir] = await Promise.all([
+          fetch(`https://api.alquran.cloud/v1/surah/${params.surahNumber}/ar.alafasy`),
+          fetch(`https://api.quran.com/api/v4/chapter_recitations/7/${params.surahNumber}`),
+          fetch(`https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/bn-tafsir-abu-bakr-zakaria/${params.surahNumber}/${params.ayahNumber}.json`)
+          ]);
+          const surahDetailsData = await surahDetails.json();
+          const surahAudioData = await surahAudio.json();
+          const surahTafsirData = await surahTafsir.json();
+          return { surah: surahDetailsData, audio: surahAudioData, tafsir: surahTafsirData };
+          } catch (error) {
+          console.error('Error fetching combined data:', error);
+          throw error;
+          }
+          },
+          element: <TafsirDetails></TafsirDetails>,
+        errorElement: <ErrorPage></ErrorPage>
+      },
     ]
   }
 ]);

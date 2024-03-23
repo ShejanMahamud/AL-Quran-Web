@@ -88,7 +88,7 @@ const Ayah = () => {
       </div>
     <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5">
       <div className=''>
-        <h1 className=' text-sm lg:text-xl font-bold text-white mb-3' id='bangla'>{banglaLang.text}</h1>
+        <h1 className=' text-sm lg:text-xl font-medium text-white mb-3 font-mukti' id='bangla'>{banglaLang.text}</h1>
         <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishLang.text}</span>
         <div className='flex  items-center gap-5 mt-5'>
           <button onClick={handleAudio}>

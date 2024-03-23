@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
 import Ayahs from '../Ayahs/Ayahs';
 
+
 const SurahDetails = () => {
   const [isPlaying, setIsPlaying] = useState(null);
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ const SurahDetails = () => {
   const banglaLang = data.surah.data[1];
   const { number, name, englishName, englishNameTranslation, revelationType, numberOfAyahs, ayahs, edition } = data.surah.data[2];
 
-  
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10; 
 
@@ -111,6 +111,7 @@ const SurahDetails = () => {
             <Ayahs
               key={ayah.number}
               arbiAyah={ayah}
+              surahNumber={number}
               banglaAyah={banglaLang.ayahs.find(banglaAyah => banglaAyah.number === ayah.number)}
               englishAyah={englishLang.ayahs.find(englishAyah => englishAyah.number === ayah.number)}
             />

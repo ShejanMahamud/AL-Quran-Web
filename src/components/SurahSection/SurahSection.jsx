@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'react-loading-skeleton/dist/skeleton.css';
 import 'swiper/css';
 import 'swiper/css/bundle';
 import { Navigation } from 'swiper/modules';
@@ -9,6 +10,7 @@ import BookmarkSurah from '../BookmarkSurah/BookmarkSurah';
 import Surah from '../Surah/Surah';
 
 const SurahSection = ({ handleSurahClick }) => {
+    const [loading, setLoading] = useState(true)
     const [surahs, setSurahs] = useState([]);
     const [bookmarkedSurah, setBookmarkedSurah] = useState([]);
     const [bookmarkedAyah, setBookmarkedAyah] = useState([]);
@@ -18,6 +20,7 @@ const SurahSection = ({ handleSurahClick }) => {
         fetch('https://api.alquran.cloud/v1/meta')
             .then(res => res.json())
             .then(data => setSurahs(data.data.surahs.references));
+            setLoading(false)
     }, []);
 
     useEffect(() => {
@@ -63,9 +66,9 @@ const SurahSection = ({ handleSurahClick }) => {
         } 
     };
 
-
     return (
-        <main className='w-[90%] mx-auto'>
+        <main className='w-[90%] mx-auto pb-20'>
+            
             <div className='group'>
                 <div className='mb-5'>
                     <button onClick={() => setViewMode('Ayah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5 `}>BookMarked Ayats</button>
@@ -91,6 +94,7 @@ const SurahSection = ({ handleSurahClick }) => {
                     }}
                 >
                     <div className='grid grid-cols-3 grid-rows-1 items-center gap-5'>
+                        
                         {viewMode === 'Surah' &&
                             bookmarkedSurah.length !== 0 && bookmarkedSurah.map(surah => <SwiperSlide><BookmarkSurah key={surah.number} surah={surah}></BookmarkSurah></SwiperSlide>)
                         }
@@ -105,8 +109,13 @@ const SurahSection = ({ handleSurahClick }) => {
             </div>
 
             <hr className='border border-gray-700 w-[90%] mx-auto my-10' />
-
+            
             <div className='w-full grid lg:grid-cols-3 grid-cols-1 row-auto items-center justify-between gap-6 mt-20'>
+             {
+                    loading && <div className='w-full flex justify-center'>
+                    <span className="loading loading-spinner text-info loading-lg"></span>
+                    </div>
+                }
                 {surahs.map(surah => <Surah key={surah.number} surah={surah} handleSurahClick={handleSurahClick}></Surah>)}
             </div>
         </main>

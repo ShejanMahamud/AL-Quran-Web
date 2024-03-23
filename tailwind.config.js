@@ -10,7 +10,8 @@ fontFamily: {
         "poppins": "Poppins",
         "readex-pro" : "Readex Pro",
         "k2d" : "K2D",
-        "noto-naskh-arabic" : "Noto Naskh Arabic"
+        "noto-naskh-arabic" : "Noto Naskh Arabic",
+        "mukti" : "Mukti"
       },
 },
   },
