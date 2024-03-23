@@ -2,8 +2,10 @@ import React, { useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import { FaBookOpen, FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons/fa";
 import { IoCopy } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
-import { setAyahBookmarkToLocalStorage } from '../../Utils/localStorage';
+import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
 
 const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
   const { number, text, audio } = arbiAyah;
@@ -36,7 +38,17 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
     setIsPlaying(false); // Set isPlaying to false when audio ends
   };
 
-
+  const setAyahBookmarkToLocalStorage = (ayahId) => {
+    let BookmarkAyahInLocalStorage = getBookMarkAyahFromLocalStorage();
+    if(!BookmarkAyahInLocalStorage.includes(ayahId)){
+        BookmarkAyahInLocalStorage.push(ayahId);
+        const strBookmarkAyah = JSON.stringify(BookmarkAyahInLocalStorage);
+        localStorage.setItem('ayah-id', strBookmarkAyah);
+        toast.success('Ayah Saved!')
+    }else{
+        toast.error('Already Saved!')
+    }
+  }
 
   const copyCode = () => {
     navigator.clipboard
@@ -98,6 +110,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah }) => {
       <Tooltip id="tafsir" />
       <Tooltip id="share" />
       <Tooltip id="back" />
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

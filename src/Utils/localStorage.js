@@ -1,3 +1,4 @@
+
 const getBookMarkAyahFromLocalStorage = () => {
     const bookmarkedAyah = localStorage.getItem('ayah-id');
     if(bookmarkedAyah){
@@ -8,9 +9,12 @@ const getBookMarkAyahFromLocalStorage = () => {
 
 const setAyahBookmarkToLocalStorage = (ayahId) => {
     let BookmarkAyahInLocalStorage = getBookMarkAyahFromLocalStorage();
-    BookmarkAyahInLocalStorage.push(ayahId);
-    const strBookmarkAyah = JSON.stringify(BookmarkAyahInLocalStorage);
-    localStorage.setItem('ayah-id', strBookmarkAyah);
+    if(!BookmarkAyahInLocalStorage.includes(ayahId)){
+        BookmarkAyahInLocalStorage.push(ayahId);
+        const strBookmarkAyah = JSON.stringify(BookmarkAyahInLocalStorage);
+        localStorage.setItem('ayah-id', strBookmarkAyah);
+    }
+    
 }
 
 const getBookMarkSurahFromLocalStorage = () => {

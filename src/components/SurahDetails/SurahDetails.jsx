@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { default as React, useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import { FaBookmark, FaPause, FaPlay } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
@@ -6,7 +6,9 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { LuBox } from "react-icons/lu";
 import ReactPaginate from 'react-paginate';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { setSurahBookmarkToLocalStorage } from '../../Utils/localStorage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
 import Ayahs from '../Ayahs/Ayahs';
 
 const SurahDetails = () => {
@@ -19,7 +21,6 @@ const SurahDetails = () => {
   const { number, name, englishName, englishNameTranslation, revelationType, numberOfAyahs, ayahs, edition } = data.surah.data[2];
 
   
-
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10; 
 
@@ -56,6 +57,17 @@ const SurahDetails = () => {
     setIsPlaying(false); // Set isPlaying to false when audio ends
   }
 
+  const setSurahBookmarkToLocalStorage = (surahId) => {
+    let BookmarkSurahInLocalStorage = getBookMarkSurahFromLocalStorage();
+    if(!BookmarkSurahInLocalStorage.includes(surahId)){
+        BookmarkSurahInLocalStorage.push(surahId);
+        toast.success('Saved Surah!') 
+    }else{
+      toast.error('Already Saved')
+    }
+    const strBookmarkSurah = JSON.stringify(BookmarkSurahInLocalStorage);
+    localStorage.setItem('surah-id', strBookmarkSurah);
+}
 
   return (
     <main className='h-auto w-full mb-5' id='ontop'>
@@ -122,6 +134,7 @@ const SurahDetails = () => {
         </div>
       </div>
       {audio && <audio ref={audioRef} src={audio} onEnded={handleAudioEnd} />}
+      <ToastContainer></ToastContainer>
     </main>
   );
 }

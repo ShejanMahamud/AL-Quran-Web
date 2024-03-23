@@ -3,7 +3,7 @@ import 'swiper/css';
 import 'swiper/css/bundle';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
+import { getBookMarkAyahFromLocalStorage, getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
 import BookmarkAyah from '../BookmarkAyah/BookmarkAyah';
 import BookmarkSurah from '../BookmarkSurah/BookmarkSurah';
 import Surah from '../Surah/Surah';
@@ -22,50 +22,54 @@ const SurahSection = ({ handleSurahClick }) => {
 
     useEffect(() => {
         const bookmarkedSurahLS = getBookMarkSurahFromLocalStorage();
-        const bookmarkedSurahObjects = bookmarkedSurahLS
+        if(bookmarkedSurahLS.length !== 0){
+            const bookmarkedSurahObjects = bookmarkedSurahLS
             .map(surahId => surahs.find(surah => surah.number === surahId))
             .filter(Boolean);
         setBookmarkedSurah(bookmarkedSurahObjects);
-    }, [surahs]);
+        }
+    });
 
-    const updateBookmarkedAyah = () => {
-        const bookmarkedAyahLS = getBookMarkSurahFromLocalStorage();
-
-        const fetchPromises = bookmarkedAyahLS.map(ayahId => {
-            return fetch(`https://api.alquran.cloud/v1/ayah/${ayahId}/editions/en.asad,bn.bengali,ar.alafasy`)
-                .then(res => res.json())
-                .then(data => data.data);
-        });
-
-        Promise.all(fetchPromises)
-            .then(bookmarkedAyahs => {
-                setBookmarkedAyah(bookmarkedAyahs.slice(0, 1)); // Show only one bookmarked Ayah by default
+    useEffect(() => {
+        const updateBookmarkedAyah = async () => {
+            const bookmarkedAyahLS = getBookMarkAyahFromLocalStorage();
+            
+            const fetchPromises = bookmarkedAyahLS.map(async ayahId => {
+                const response = await fetch(`https://api.alquran.cloud/v1/ayah/${ayahId}/editions/en.asad,bn.bengali,ar.alafasy`);
+                const data = await response.json();
+                return data.data;
             });
-    };
+            
+            const bookmarkedAyahs = await Promise.all(fetchPromises);
+            setBookmarkedAyah(bookmarkedAyahs);
+        };
+    
+        if (viewMode === 'Ayah') {
+            updateBookmarkedAyah();
+        }else {
+            updateBookmarkedSurah();
+        }
+    },[viewMode]); // Adding viewMode as dependency to trigger effect when viewMode changes
+    
 
     const updateBookmarkedSurah = () => {
         const bookmarkedSurahLS = getBookMarkSurahFromLocalStorage();
-        const bookmarkedSurahObjects = bookmarkedSurahLS
+        if(bookmarkedSurahLS.length !== 0){
+            const bookmarkedSurahObjects = bookmarkedSurahLS
             .map(surahId => surahs.find(surah => surah.number === surahId))
             .filter(Boolean);
         setBookmarkedSurah(bookmarkedSurahObjects);
-        setViewMode('Surah'); // Set view mode to Surah when updating bookmarked Surah
+        setViewMode('Surah');
+        } 
     };
 
-    useEffect(() => {
-        if (viewMode === 'Ayah') {
-            updateBookmarkedAyah();
-        } else {
-            updateBookmarkedSurah();
-        }
-    }, [viewMode]);
 
     return (
         <main className='w-[90%] mx-auto'>
             <div className='group'>
                 <div className='mb-5'>
-                    <button onClick={() => setViewMode('Ayah')} className='focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5'>BookMarked Ayats</button>
-                    <button onClick={() => setViewMode('Surah')} className='focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5'>BookMarked Surah</button>
+                    <button onClick={() => setViewMode('Ayah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5 `}>BookMarked Ayats</button>
+                    <button onClick={() => setViewMode('Surah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5`}>BookMarked Surah</button>
                 </div>
                 <Swiper
                     modules={[Navigation]}
