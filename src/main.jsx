@@ -5,16 +5,23 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from "./App";
 import Ayah from "./components/Ayah/Ayah";
+import AyahApp from "./components/AyahApp/AyahApp";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import Home from "./components/Home/Home";
+import SurahApp from "./components/SurahApp/SurahApp";
 import SurahDetails from "./components/SurahDetails/SurahDetails";
 import './index.css';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <Home></Home>,
+    errorElement: <ErrorPage></ErrorPage>
+  },
+  {
+    path: '/surah/:surahNumber',
+    element: <SurahApp></SurahApp>,
     children: [
       {
         path: '/surah/:surahNumber',
@@ -35,15 +42,20 @@ const router = createBrowserRouter([
           element: <SurahDetails></SurahDetails>,
         errorElement: <ErrorPage></ErrorPage>
       },
-      {
-        path: '/ayah/:ayahNumber',
-        loader: ({params}) => axios.get(`https://api.alquran.cloud/v1/ayah/${params.ayahNumber}/editions/en.asad,bn.bengali,ar.alafasy`),
-        element: <Ayah></Ayah>,
-        errorElement: <ErrorPage></ErrorPage>
-      }
-    ],
+    ]
+  },
+  {
+    path: '/ayah/:ayahNumber',
+    element: <AyahApp></AyahApp>,
+    children: [
+          {
+    path: '/ayah/:ayahNumber',
+    loader: ({params}) => axios.get(`https://api.alquran.cloud/v1/ayah/${params.ayahNumber}/editions/en.asad,bn.bengali,ar.alafasy`),
+    element: <Ayah></Ayah>,
     errorElement: <ErrorPage></ErrorPage>
   },
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -8,7 +8,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import { setAyahBookmarkToLocalStorage, setSurahBookmarkToLocalStorage } from '../../Utils/localStorage';
 
-const Ayahs = () => {
+const Ayah = () => {
   
     const data = useLoaderData();
     const navigate = useNavigate();
@@ -139,4 +139,4 @@ const Ayahs = () => {
   );
 }
 
-export default Ayahs;
+export default Ayah;
