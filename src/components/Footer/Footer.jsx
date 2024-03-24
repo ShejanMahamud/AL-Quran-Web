@@ -1,59 +1,87 @@
-import React from 'react'
+import React from 'react';
+import { BiSolidDonateHeart } from "react-icons/bi";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+	const navigate = useNavigate();
+
+	const handleNavigate = () => {
+		navigate(`/`)
+	  }
+
+	  const handleNavigateToSurah = () => {
+		navigate(`/surah/1`)
+	  }
+
+	  const handleNavigateToAyah = () => {
+		navigate(`/ayah/1`)
+	  }
+	  const handleNavigateToTafsir = () => {
+		navigate(`/tafsir/1/1`)
+	  }
+
+
   return (
-    <footer className="px-4 divide-y dark:bg-gray-100 dark:text-gray-800">
+    <footer className="px-4 py-5 divide-y bg-[url('footer.svg')] bg-[#121C26] bg-no-repeat bg-cover bg-center">
+		
 	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
-		<div className="lg:w-1/3">
-			<a rel="noopener noreferrer" href="#" className="flex justify-center space-x-3 lg:justify-start">
-				<div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" className="flex-shrink-0 w-5 h-5 rounded-full dark:text-gray-50">
-						<path d="M18.266 26.068l7.839-7.854 4.469 4.479c1.859 1.859 1.859 4.875 0 6.734l-1.104 1.104c-1.859 1.865-4.875 1.865-6.734 0zM30.563 2.531l-1.109-1.104c-1.859-1.859-4.875-1.859-6.734 0l-6.719 6.734-6.734-6.734c-1.859-1.859-4.875-1.859-6.734 0l-1.104 1.104c-1.859 1.859-1.859 4.875 0 6.734l6.734 6.734-6.734 6.734c-1.859 1.859-1.859 4.875 0 6.734l1.104 1.104c1.859 1.859 4.875 1.859 6.734 0l21.307-21.307c1.859-1.859 1.859-4.875 0-6.734z"></path>
-					</svg>
-				</div>
-				<span className="self-center text-2xl font-semibold">Brand name</span>
-			</a>
-		</div>
+	<div className='flex flex-col'>
+	<div onClick={handleNavigate} className='flex items-center gap-2'>
+            <div className='bg-[#32B7C5] h-14 w-14 rounded-xl flex items-center justify-center'>
+            <img src="https://i.ibb.co/Kr4HN1m/quran.png" alt="quran.png" className='w-8'/>
+            </div>
+            <div className='flex flex-col items-start'>
+            <span className={`text-2xl font-mukti`}>আল কুরআন</span>
+            <span className='text-xs font-mukti'>কুরআন বাংলা</span>
+			
+            </div>
+			
+        </div>
+		<p className='w-[80%] opacity-70 font-mukti font-sm mt-2'>তোমাদের মধ্যে সর্বশ্রেষ্ঠ ব্যক্তি সেই; যে নিজে কুরআন শেখে ও অপরকে শিক্ষা দেয়</p>
+	</div>
 		<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Product</h3>
+				<h3 className="tracking-wide uppercase text-gray-500 font-bold">Features</h3>
 				<ul className="space-y-1">
 					<li>
-						<a rel="noopener noreferrer" href="#">Features</a>
+						<p onClick={handleNavigateToSurah}>Read Quran</p>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Integrations</a>
+						<p onClick={handleNavigateToAyah}>Read Ayah</p>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Pricing</a>
+						<p onClick={handleNavigateToTafsir}>Read Tafsir</p>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">FAQ</a>
+						<p onClick={handleNavigateToAyah}>Listen Audio</p>
 					</li>
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Company</h3>
+				<h3 className="tracking-wide uppercase text-gray-500 font-bold">Quick Links</h3>
 				<ul className="space-y-1">
-					<li>
-						<a rel="noopener noreferrer" href="#">Privacy</a>
+				<li>
+						<Link to={`https://github.com/ShejanMahamud`}><p>GitHub</p></Link>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Terms of Service</a>
+						<Link to={`https://shejanmahamud.netlify.app`}><p>Portfolio</p></Link>
+					</li>
+					<li>
+						<Link to={`https://github.com/ShejanMahamud`}><p>More Projects</p></Link>
 					</li>
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<h3 className="uppercase dark:text-gray-900">Developers</h3>
+				<h3 className="uppercase text-gray-500 font-bold">Important Links</h3>
 				<ul className="space-y-1">
-					<li>
-						<a rel="noopener noreferrer" href="#">Public API</a>
+				<li>
+						<Link to={`https://github.com/ShejanMahamud/AL-Quran-Web/issues`}><p>Report an Issue</p></Link>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Documentation</a>
+						<Link to={`https://cdn.jsdelivr.net/gh/ShejanMahamud/AL-Quran-Web@main/public/Surah.json`}><p>Surah Api</p></Link>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Guides</a>
+						<Link to={`https://github.com/spa5k/tafsir_api/tree/main/tafsir/bn-tafsir-abu-bakr-zakaria`}><p>Tafsir Api</p></Link>
 					</li>
 				</ul>
 			</div>
@@ -76,10 +104,15 @@ const Footer = () => {
 						</svg>
 					</a>
 				</div>
+				<button className='bg-[#32B7C5] px-4 py-2 rounded-lg text-white flex items-center gap-3 font-bold'><BiSolidDonateHeart className='text-2xl'/>Support</button>
 			</div>
 		</div>
 	</div>
-	<div className="py-6 text-sm text-center dark:text-gray-600">© 1968 Company Co. All rights reserved.</div>
+	<div className="py-6 text-sm text-center text-gray-600 font-medium font-poppins *:mb-3">
+		<p className='tracking-wider'>© 2024 <Link to={'https://github.com/ShejanMahamud'}><span className='text-[#32B7C5]'>Shejan Mahamud</span></Link> All rights reserved.</p>
+
+		<p className='opacity-50 text-xs'>Design Inspiration From <Link to={'https://quranmazid.com'}><span className='text-[#32B7C5]'>Quran Mazid</span></Link> | <Link to={'https://www.figma.com/community/file/1308277964149255728/quranpersis-co-id'}><span className='text-[#32B7C5]'>Lafidz Tafara</span></Link></p>
+	</div>
 </footer>
   )
 }

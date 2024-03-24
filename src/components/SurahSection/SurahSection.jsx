@@ -72,7 +72,7 @@ const SurahSection = ({ handleSurahClick }) => {
     };
 
     return (
-        <main className='w-[90%] mx-auto pb-20'>
+        <main className="w-[90%] mx-auto pb-20">
             
             <div className='group'>
                 <div className='my-5'>

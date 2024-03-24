@@ -1,39 +1,49 @@
 import React, { useState } from 'react';
 import { IoSearch } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
 const [searchText, setSearchText] = useState('');
+
+const navigate = useNavigate();
+
+const handleNavigateToSurah = (id) => {
+    navigate(`/surah/${id}`)
+}
+
+const handleNavigateToAyah = (id) => {
+    navigate(`/ayah/${id}`)
+}
 
     const getSearchText = (e) => {
         setSearchText(e.target.value)
     }
 
   return (
-    <header className={`bg-[url('https://i.ibb.co/7p08xj3/image.webp')] w-full h-[450px] bg-no-repeat bg-cover bg-center py-40 *:mb-5`}>
+    <header className={`bg-[url('arabic.svg')] w-full h-[500px] bg-no-repeat bg-cover bg-center py-40 *:mb-5 bg-[#121C26] font-mukti`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
-            <img src="https://i.ibb.co/HHPSKzM/logo.png" alt="logo.svg" className='w-20'/>
-            <div className='flex items-start flex-col text-white'>
-            <span className='font-semibold text-4xl font-mukti'>আল কুরআন</span>
-            <span className='font-normal text-lg font-mukti'>কুরআন বাংলা</span>
+            {/* <img src="https://i.ibb.co/XVHV7NT/pngwing-com.png" alt="logo.svg" className='w-28 shadow-2xl'/> */}
+            <div className='flex flex-col text-white justify-center text-center'>
+            <span className='font-semibold lg:text-5xl text-4xl font-mukti shadow-2xl mb-2'>আল কুরআন</span>
+            <span className='font-normal lg:text-lg text-sm font-mukti'>কুরআন বাংলা</span>
             </div>
         </div>
 
         {/* <button onClick={isDarkMode} className='bg-white p-3'></button> */}
 
-        <div className='flex items-center justify-between bg-[#28333F] rounded-lg w-[90%] lg:w-[40%] mx-auto px-5 py-3 shadow-lg'>
-            <input type="text" className='bg-transparent focus:outline-none' placeholder='Search Surah Number' onChange={getSearchText}/>
+        <div className='flex items-center justify-between backdrop-blur-lg rounded-lg w-[80%] lg:w-[40%] mx-auto px-5 py-3 shadow-2xl border border-white border-opacity-30'>
+            <input type="text" className='bg-transparent focus:outline-none placeholder:text-gray-300 placeholder:text-xs lg:placeholder:text-base' placeholder='Search Surah Number' onChange={getSearchText}/>
             <Link to={`/surah/${searchText}`}><button><IoSearch /></button></Link>
         </div>
 
-        {/* <div className='text-white font-poppins flex items-center gap-3 w-[80%] mx-auto justify-center'>
-            <span className='font-bold '>Frequently Read: </span>
-            <button className='bg-[#32B7C5] rounded-full px-6 py-3 font-semibold flex items-center justify-center text-xs'>Al-Kahfi</button>
-            <button className='bg-[#32B7C5] rounded-full px-6 py-3 font-semibold flex items-center justify-center text-xs'>Al-Bakarah</button>
-            <button className='bg-[#32B7C5] rounded-full px-6 py-3 font-semibold flex items-center justify-center text-xs'>Ar-Rahman</button>
-            <button className='bg-[#32B7C5] rounded-full px-6 py-3 font-semibold flex items-center justify-center text-xs'>Ayat Qursi</button>
-            <button className='bg-[#32B7C5] rounded-full px-6 py-3 font-semibold flex items-center justify-center text-xs'>Ali Imran</button>
-        </div> */}
+        <div className='text-white font-poppins flex items-center gap-3 w-[80%] mx-auto justify-center'>
+            
+            <button className='bg-[#28333F] text-[#70808e] rounded-full lg:px-5 px-5 lg:py-2 py-1 font-semibold flex items-center justify-center text-[8px] lg:text-xs border-opacity-30 border border-[#32B7C5] hover:text-white' onClick={()=>handleNavigateToSurah(2)}>আন নাহল</button>
+            <button className='bg-[#28333F] text-[#70808e] rounded-full lg:px-5 px-5 lg:py-2 py-1 font-semibold flex items-center justify-center text-[8px] lg:text-xs border-opacity-30 border border-[#32B7C5] hover:text-white' onClick={()=>handleNavigateToSurah(16)}>আল বাকারা</button>
+            <button className='bg-[#28333F] text-[#70808e] rounded-full lg:px-5 px-5 lg:py-2 py-1 font-semibold flex items-center justify-center text-[8px] lg:text-xs border-opacity-30 border border-[#32B7C5] hover:text-white' onClick={()=>handleNavigateToSurah(55)}>আর রহমান</button>
+            <button className='bg-[#28333F] text-[#70808e] rounded-full lg:px-5 px-5 lg:py-2 py-1 font-semibold flex items-center justify-center text-[8px] lg:text-xs border-opacity-30 border border-[#32B7C5] hover:text-white' onClick={()=>handleNavigateToAyah(262)}>আয়াতুল কুরসি</button>
+            <button className='bg-[#28333F] text-[#70808e]  rounded-full lg:px-5 px-3 lg:py-2 py-1 font-semibold hidden lg:flex items-center justify-center text-[8px] lg:text-xs border-opacity-30 border border-[#32B7C5] hover:text-white' onClick={()=>handleNavigateToSurah(9)}>আত-তাওবাহ্‌</button>
+        </div>
 
 
         {/* <div className='w-[80%] mx-auto font-poppins flex items-center gap-5 justify-center'>
