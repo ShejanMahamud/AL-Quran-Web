@@ -10,19 +10,19 @@ const [searchText, setSearchText] = useState('');
     }
 
   return (
-    <header className={`bg-[url('https://i.ibb.co/7p08xj3/image.webp')] w-full h-[400px] bg-no-repeat bg-cover bg-center py-20 *:mb-5`}>
+    <header className={`bg-[url('https://i.ibb.co/7p08xj3/image.webp')] w-full h-[450px] bg-no-repeat bg-cover bg-center py-40 *:mb-5`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
             <img src="https://i.ibb.co/HHPSKzM/logo.png" alt="logo.svg" className='w-20'/>
             <div className='flex items-start flex-col text-white'>
-            <span className='font-semibold text-4xl'>AlQuran</span>
-            <span className='font-normal text-lg'>Bangla</span>
+            <span className='font-semibold text-4xl font-mukti'>আল কুরআন</span>
+            <span className='font-normal text-lg font-mukti'>কুরআন বাংলা</span>
             </div>
         </div>
 
         {/* <button onClick={isDarkMode} className='bg-white p-3'></button> */}
 
         <div className='flex items-center justify-between bg-[#28333F] rounded-lg w-[90%] lg:w-[40%] mx-auto px-5 py-3 shadow-lg'>
-            <input type="text" className='bg-transparent focus:outline-none' placeholder='Search Surah, Ayat, Juds ...' onChange={getSearchText}/>
+            <input type="text" className='bg-transparent focus:outline-none' placeholder='Search Surah Number' onChange={getSearchText}/>
             <Link to={`/surah/${searchText}`}><button><IoSearch /></button></Link>
         </div>
 

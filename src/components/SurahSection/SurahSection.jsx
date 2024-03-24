@@ -17,12 +17,11 @@ const SurahSection = ({ handleSurahClick }) => {
     const [viewMode, setViewMode] = useState('Surah');
 
     useEffect(() => {
-        fetch('https://api.alquran.cloud/v1/meta')
+        fetch('Surah.json')
             .then(res => res.json())
             .then(data => {
-                // Simulate a delay of 2 seconds
                 setTimeout(() => {
-                    setSurahs(data.data.surahs.references);
+                    setSurahs(data);
                     setLoading(false);
                 }, 2000);
             });
@@ -115,13 +114,13 @@ const SurahSection = ({ handleSurahClick }) => {
             </div>
 
             <hr className='border border-gray-700 w-[90%] mx-auto my-10' />
-            
-            <div className='w-full grid lg:grid-cols-3 grid-cols-1 row-auto items-center justify-between gap-6 mt-20'>
-             {
+            {
                     loading && <div className='w-full flex justify-center my-3'>
                     <span className="loading loading-spinner text-info loading-lg"></span>
                     </div>
                 }
+            <div className='w-full grid lg:grid-cols-3 grid-cols-1 row-auto items-center justify-between gap-6 mt-20'>
+             
                 {surahs.map(surah => <Surah key={surah.number} surah={surah} handleSurahClick={handleSurahClick}></Surah>)}
             </div>
         </main>

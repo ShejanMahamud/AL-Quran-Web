@@ -19,14 +19,15 @@ useEffect(()=>{
 },[theme])
 
   return (
-    <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-5 lg:px-20`}>
+    <div>
+      <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-5 lg:px-20 fixed top-0 backdrop-blur-2xl z-50`}>
         <div className='flex items-center gap-2'>
             <div className='bg-[#32B7C5] h-14 w-14 rounded-xl flex items-center justify-center'>
             <img src="https://i.ibb.co/Kr4HN1m/quran.png" alt="quran.png" className='w-8'/>
             </div>
             <div className='flex flex-col items-start'>
-            <span className={`text-2xl`}>Al-Quran</span>
-            <span className='text-xs '>Bangla Quran</span>
+            <span className={`text-2xl font-mukti`}>আল কুরআন</span>
+            <span className='text-xs font-mukti'>কুরআন বাংলা</span>
             </div>
         </div>
         {/* <ul>
@@ -38,6 +39,12 @@ useEffect(()=>{
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
 </label>
     </nav>
+    {/* <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-5 lg:px-20 fixed bottom-0 backdrop-blur-2xl z-50`}>
+        <div className='flex items-center gap-2'>
+        <GoHomeFill className='text-[#32B7C5] text-3xl'/>
+        </div>
+    </nav> */}
+    </div>
   )
 }
 
