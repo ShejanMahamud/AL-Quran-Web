@@ -19,8 +19,12 @@ const handleNavigateToAyah = (id) => {
         setSearchText(e.target.value)
     }
 
+    const headerBg = {
+        backgroundImage : "url('arabic.svg')"
+    }
+
   return (
-    <header className={`bg-[url('arabic.svg')] w-full h-[500px] bg-no-repeat bg-cover bg-center py-40 *:mb-5 bg-[#121C26] font-mukti`}>
+    <header style={headerBg} className={`w-full h-[500px] bg-no-repeat bg-cover bg-center py-40 *:mb-5 bg-[#121C26] font-mukti`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
             {/* <img src="https://i.ibb.co/XVHV7NT/pngwing-com.png" alt="logo.svg" className='w-28 shadow-2xl'/> */}
             <div className='flex flex-col text-white justify-center text-center'>

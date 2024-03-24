@@ -1,10 +1,17 @@
 import { default as React, useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
-import { FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons/fa";
+import { FaBookmark, FaFacebookF, FaPause, FaPlay, FaShareAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 import { IoArrowBackCircle, IoCopy } from "react-icons/io5";
 import { LuBox } from "react-icons/lu";
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import {
+  FacebookShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton
+} from "react-share";
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
 
@@ -51,9 +58,9 @@ const TafsirDetails = () => {
         setIsPlaying(false); // Set isPlaying to false when audio ends
       }
 
-      const copyCode = () => {
+      const copyCode = (text) => {
         navigator.clipboard
-          .writeText(tafsirDetails)
+          .writeText(text)
           .then(() => {
             setCopy("Copied!");
             setTimeout(function () {
@@ -63,7 +70,7 @@ const TafsirDetails = () => {
       };
 
   return (
-      <div className='w-full grid grid-cols-1 row-auto items-start -mt-5'>
+      <div className='w-full grid grid-cols-1 row-auto items-start -mt-5 pb-5'>
       <div className={`bg-[#1C2733] px-10 py-10 mx-auto flex justify-center flex-col items-center gap-3 rounded-2xl w-[90%] mb-5 ${revelationType === "Meccan" ? "bg-[url('https://i.ibb.co/f9szXvM/makkah-dark.png')]" : "bg-[url('https://i.ibb.co/p3ncHhy/madinah-dark.png')]"} bg-no-repeat bg-left bg-contain`}>
         <h1 className='text-3xl font-noto-naskh-arabic text-white'>{name}</h1>
         <div className='mb-3 text-center'>
@@ -102,15 +109,51 @@ const TafsirDetails = () => {
         <h1 className='text-sm lg:text-xl text-white mb-3 font-mukti' id='bangla'>{tafsirDetails}</h1>
        
         <div className='flex  items-center gap-5 mt-5'>
-          <button><FaBookmark className='text-[#32B7C5] focus:outline-none' data-tooltip-id="bookmark"
-            data-tooltip-content="Bookmark Ayah"
-            data-tooltip-place="top" /></button>
-          <button onClick={copyCode}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
+
+          <button onClick={()=>copyCode(tafsirDetails)}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
             data-tooltip-content={copy}
             data-tooltip-place="top" /></button>
-          <button><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
+
+          <button onClick={()=>document.getElementById('my_modal_5').showModal()}><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
             data-tooltip-content="Share"
             data-tooltip-place="top" /></button>
+
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+<dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box bg-transparent backdrop-blur-lg border border-white border-opacity-20">
+    <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
+  <div className='flex items-center gap-3'>
+  <TwitterShareButton url={location.pathname}>
+  <FaXTwitter className='text-[#32B7C5] text-2xl'/>
+  </TwitterShareButton>
+
+  <FacebookShareButton url={location.pathname}>
+  <FaFacebookF  className='text-[#32B7C5] text-2xl'/>
+  </FacebookShareButton>
+
+  <TelegramShareButton url={location.pathname}>
+  <FaTelegramPlane   className='text-[#32B7C5] text-2xl'/>
+  </TelegramShareButton>
+
+  <WhatsappShareButton url={location.pathname}>
+  <FaWhatsapp  className='text-[#32B7C5] text-2xl'/>
+  </WhatsappShareButton>
+  </div>
+
+<div className='my-5 textarea textarea-info flex items-center w-full justify-between'>
+<p>{window.location.href}</p>
+<button onClick={()=>copyCode(window.location.href)} ><IoCopy className='text-[#32B7C5] text-xl' /></button>
+</div>
+
+    <div className="modal-action">
+      <form method="dialog">
+       
+        <button className=" bg-[#32B7C5] text-white px-4 py-2 rounded-lg">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
         </div>
       </div>
 
@@ -129,7 +172,9 @@ const TafsirDetails = () => {
       <Tooltip id="tafsir" />
       <Tooltip id="share" />
       <Tooltip id="back" />
+      
     </div>
+    
       </div>
   )
 }

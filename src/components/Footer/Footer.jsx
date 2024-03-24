@@ -20,9 +20,12 @@ const Footer = () => {
 		navigate(`/tafsir/1/1`)
 	  }
 
+	  const footerBg = {
+        backgroundImage : "url('footer.svg')"
+    }
 
   return (
-    <footer className="px-4 py-5 divide-y bg-[url('footer.svg')] bg-[#121C26] bg-no-repeat bg-cover bg-center">
+    <footer style={footerBg} className="px-4 py-5 divide-y bg-[#121C26] bg-no-repeat bg-cover bg-center">
 		
 	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
 	<div className='flex flex-col'>

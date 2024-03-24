@@ -1,14 +1,23 @@
 import React, { useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
-import { FaBookOpen, FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons/fa";
+import { FaBookOpen, FaBookmark, FaFacebookF, FaPause, FaPlay, FaShareAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { IoCopy } from "react-icons/io5";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  FacebookShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton
+} from "react-share";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
 import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
 
 const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
+
+  const location = useLocation();
   const { number, text, audio,numberInSurah } = arbiAyah;
   const [isLoading, setIsLoading] = useState(false);
   const arabicNumber = number.toLocaleString('ar-EG');
@@ -54,9 +63,9 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
     }
   }
 
-  const copyCode = () => {
+  const copyCode = (text) => {
     navigator.clipboard
-      .writeText(banglaAyah.text)
+      .writeText(text)
       .then(() => {
         setCopy("Copied!");
         setTimeout(function () {
@@ -96,7 +105,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
           <button onClick={()=>setAyahBookmarkToLocalStorage(number)}><FaBookmark className='text-[#32B7C5] focus:outline-none' data-tooltip-id="bookmark"
             data-tooltip-content="Bookmark Ayah"
             data-tooltip-place="top" /></button>
-          <button onClick={copyCode}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
+          <button onClick={()=>copyCode(banglaAyah)}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
             data-tooltip-content={copy}
             data-tooltip-place="top" /></button>
           <button onClick={handleTafsir}>
@@ -104,9 +113,44 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
               data-tooltip-content="Tafsir"
               data-tooltip-place="top" />
           </button>
-          <button><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
+          <button onClick={()=>{document.getElementById('my_modal_5').showModal();setIsLoading(true)}}><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
             data-tooltip-content="Share"
             data-tooltip-place="top" /></button>
+
+<dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box bg-transparent backdrop-blur-lg border border-white border-opacity-20">
+    <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
+  <div className='flex items-center gap-3'>
+  <TwitterShareButton url={location.pathname}>
+  <FaXTwitter className='text-[#32B7C5] text-2xl'/>
+  </TwitterShareButton>
+
+  <FacebookShareButton url={location.pathname}>
+  <FaFacebookF  className='text-[#32B7C5] text-2xl'/>
+  </FacebookShareButton>
+
+  <TelegramShareButton url={location.pathname}>
+  <FaTelegramPlane   className='text-[#32B7C5] text-2xl'/>
+  </TelegramShareButton>
+
+  <WhatsappShareButton url={location.pathname}>
+  <FaWhatsapp  className='text-[#32B7C5] text-2xl'/>
+  </WhatsappShareButton>
+  </div>
+
+{/* <div className='my-5 textarea textarea-info flex items-center w-full justify-between'>
+<p>{`https://al-quran-web.netlify.app/ayah/${number}`}</p>
+<button onClick={()=>copyCode(`https://al-quran-web.netlify.app/ayah/${number}`)} ><IoCopy className='text-[#32B7C5] text-xl' /></button>
+</div> */}
+
+    <div className="modal-action">
+      <form method="dialog">
+       
+        <button className=" bg-[#32B7C5] text-white px-4 py-2 rounded-lg">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
             
         </div>
         {

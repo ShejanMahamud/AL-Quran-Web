@@ -13,6 +13,10 @@ fontFamily: {
         "noto-naskh-arabic" : "Noto Naskh Arabic",
         "mukti" : "Mukti"
       },
+      backgroundImage: {
+        "header-bg" : "url('../assets/images/arabic.svg')",
+        "footer-bg" : "url('../assets/images/footer.svg')"
+      }
 },
   },
   plugins: [require("daisyui")], 
