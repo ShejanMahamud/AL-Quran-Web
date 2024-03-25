@@ -24,12 +24,12 @@ const handleNavigateToAyah = (id) => {
     }
 
   return (
-    <header style={headerBg} className={`w-full h-[500px] bg-no-repeat bg-cover bg-center py-40 *:mb-5 bg-[#121C26] font-mukti`}>
+    <header style={headerBg} className={`w-full h-[500px] bg-no-repeat bg-cover bg-center py-40 *:mb-10 bg-[#121C26] font-mukti`}>
         <div className='flex items-center gap-3 justify-center font-k2d'>
             {/* <img src="https://i.ibb.co/XVHV7NT/pngwing-com.png" alt="logo.svg" className='w-28 shadow-2xl'/> */}
             <div className='flex flex-col text-white justify-center text-center'>
-            <span className='font-semibold lg:text-5xl text-4xl font-mukti shadow-2xl mb-2'>আল কুরআন</span>
-            <span className='font-normal lg:text-lg text-sm font-mukti'>কুরআন বাংলা</span>
+            <span className='font-semibold lg:text-5xl text-4xl font-mukti shadow-2xl mb-3'>আল কুরআন</span>
+            <span className='font-normal lg:text-lg text-sm w-[80%] mx-auto font-mukti'>তোমাদের মধ্যে সর্বশ্রেষ্ঠ ব্যক্তি সেই; যে নিজে কুরআন শেখে ও অপরকে শিক্ষা দেয়</span>
             </div>
         </div>
 

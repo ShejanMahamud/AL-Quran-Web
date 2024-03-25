@@ -123,19 +123,19 @@ const TafsirDetails = () => {
   <div className="modal-box bg-transparent backdrop-blur-lg border border-white border-opacity-20">
     <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
   <div className='flex items-center gap-3'>
-  <TwitterShareButton url={location.pathname}>
+  <TwitterShareButton url={window.location.href}>
   <FaXTwitter className='text-[#32B7C5] text-2xl'/>
   </TwitterShareButton>
 
-  <FacebookShareButton url={location.pathname}>
+  <FacebookShareButton url={window.location.href}>
   <FaFacebookF  className='text-[#32B7C5] text-2xl'/>
   </FacebookShareButton>
 
-  <TelegramShareButton url={location.pathname}>
+  <TelegramShareButton url={window.location.href}>
   <FaTelegramPlane   className='text-[#32B7C5] text-2xl'/>
   </TelegramShareButton>
 
-  <WhatsappShareButton url={location.pathname}>
+  <WhatsappShareButton url={window.location.href}>
   <FaWhatsapp  className='text-[#32B7C5] text-2xl'/>
   </WhatsappShareButton>
   </div>

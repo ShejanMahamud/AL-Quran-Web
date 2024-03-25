@@ -3,7 +3,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import { FaBookOpen, FaBookmark, FaFacebookF, FaPause, FaPlay, FaShareAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoCopy } from "react-icons/io5";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   FacebookShareButton,
   TelegramShareButton,
@@ -15,9 +15,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
 import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
 
-const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
 
-  const location = useLocation();
+const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
+const [modalText, setModalText] = useState(false)
+
   const { number, text, audio,numberInSurah } = arbiAyah;
   const [isLoading, setIsLoading] = useState(false);
   const arabicNumber = number.toLocaleString('ar-EG');
@@ -85,7 +86,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
   };
 
   return (
-    <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5">
+    <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5 relative">
       <div className=''>
                  
         <h1 className='text-base lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider' id='bangla'>{banglaAyah.text}</h1>
@@ -105,7 +106,7 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
           <button onClick={()=>setAyahBookmarkToLocalStorage(number)}><FaBookmark className='text-[#32B7C5] focus:outline-none' data-tooltip-id="bookmark"
             data-tooltip-content="Bookmark Ayah"
             data-tooltip-place="top" /></button>
-          <button onClick={()=>copyCode(banglaAyah)}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
+          <button onClick={()=>copyCode(banglaAyah.text)}><IoCopy className='text-[#32B7C5] focus:outline-none' data-tooltip-id="copy"
             data-tooltip-content={copy}
             data-tooltip-place="top" /></button>
           <button onClick={handleTafsir}>
@@ -113,50 +114,48 @@ const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
               data-tooltip-content="Tafsir"
               data-tooltip-place="top" />
           </button>
-          <button onClick={()=>{document.getElementById('my_modal_5').showModal();setIsLoading(true)}}><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
+          <button onClick={()=>setModalText(true)}><FaShareAlt className='text-[#32B7C5] focus:outline-none' data-tooltip-id="share"
             data-tooltip-content="Share"
             data-tooltip-place="top" /></button>
+            
+        </div>
 
-<dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box bg-transparent backdrop-blur-lg border border-white border-opacity-20">
-    <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
+{
+  modalText && <div className='bg-transparent backdrop-blur-lg border border-white border-opacity-20 lg:h-[200px] h-auto absolute lg:w-[30%] w-[80%] mx-auto left-0 right-0 top-10 rounded-2xl px-5 py-5 duration-500 z-20'>
+  <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
+
   <div className='flex items-center gap-3'>
-  <TwitterShareButton url={location.pathname}>
+  <TwitterShareButton url={window.location.href}>
   <FaXTwitter className='text-[#32B7C5] text-2xl'/>
   </TwitterShareButton>
 
-  <FacebookShareButton url={location.pathname}>
+  <FacebookShareButton url={window.location.href}>
   <FaFacebookF  className='text-[#32B7C5] text-2xl'/>
   </FacebookShareButton>
 
-  <TelegramShareButton url={location.pathname}>
+  <TelegramShareButton url={window.location.href}>
   <FaTelegramPlane   className='text-[#32B7C5] text-2xl'/>
   </TelegramShareButton>
 
-  <WhatsappShareButton url={location.pathname}>
+  <WhatsappShareButton url={window.location.href}>
   <FaWhatsapp  className='text-[#32B7C5] text-2xl'/>
   </WhatsappShareButton>
   </div>
 
-{/* <div className='my-5 textarea textarea-info flex items-center w-full justify-between'>
+  <div className='my-5 textarea textarea-info flex items-center w-full justify-between'>
 <p>{`https://al-quran-web.netlify.app/ayah/${number}`}</p>
 <button onClick={()=>copyCode(`https://al-quran-web.netlify.app/ayah/${number}`)} ><IoCopy className='text-[#32B7C5] text-xl' /></button>
-</div> */}
-
-    <div className="modal-action">
-      <form method="dialog">
-       
-        <button className=" bg-[#32B7C5] text-white px-4 py-2 rounded-lg">Close</button>
-      </form>
-    </div>
+</div>
+  <button  className=" bg-[#32B7C5] text-white px-4 py-2 rounded-lg" onClick={()=>setModalText(false)}>Close</button>
   </div>
-</dialog>
-            
-        </div>
+
+}
+
+        
         {
-                    isLoading && <div className='w-full flex justify-center my-3'>
+          isLoading && <div className='w-full flex justify-center my-3'>
                     <span className="loading loading-spinner text-info loading-lg"></span>
-                    </div>
+           </div>
                 }
       </div>
 

@@ -78,7 +78,7 @@ const SurahSection = ({ handleSurahClick }) => {
                 <div className='my-5'>
                     <button onClick={() => setViewMode('Ayah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5 `}>BookMarked Ayats</button>
                     <button onClick={() => setViewMode('Surah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5`}>BookMarked Surah</button>
-                    <button onClick={() => setViewMode('Surah')} className={`focus:bg-[#32B7C5] border border-[#32B7C5] text-white px-4 py-2 rounded-lg text-xs font-medium mr-5`}>BookMarked Tafsir</button>
+                    
                 </div>
                 <Swiper
                     modules={[Navigation]}
