@@ -82,6 +82,7 @@ const [modalText, setModalText] = useState(false)
     setTimeout(() => {
       setIsLoading(false); // Hide loader
       navigate(`/tafsir/${surahNumber}/${numberInSurah}`);
+      window.scrollTo(0, 0)
     }, 2000);
   };
 
@@ -121,7 +122,7 @@ const [modalText, setModalText] = useState(false)
         </div>
 
 {
-  modalText && <div className='bg-transparent backdrop-blur-lg border border-white border-opacity-20 lg:h-[200px] h-auto absolute lg:w-[30%] w-[80%] mx-auto left-0 right-0 top-10 rounded-2xl px-5 py-5 duration-500 z-20'>
+  modalText && <div className='bg-transparent backdrop-blur-lg border border-white border-opacity-20 h-[250px] lg:h-auto absolute lg:w-[30%] w-[80%] mx-auto left-0 right-0 top-10 lg:top-0 bottom-0 rounded-2xl px-5 py-5 duration-500 z-20 '>
   <h1 className='text-white font-poppins text-lg mb-3'>Share With Social Media</h1>
 
   <div className='flex items-center gap-3'>

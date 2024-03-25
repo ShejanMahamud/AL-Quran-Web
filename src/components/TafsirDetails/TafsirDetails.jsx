@@ -37,6 +37,7 @@ const TafsirDetails = () => {
 
     const handleGoBack = () => {
         navigate(`/surah/${number}`)
+        window.scrollTo(0, 0)
       }
 
       const handleAudio = () => {

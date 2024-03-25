@@ -10,6 +10,7 @@ const BookmarkAyah = ({ayah}) => {
 
     const handleAyahToAyah = () => {
         navigate(`/ayah/${arabicLang.number}`);
+        window.scrollTo(0, 0)
     }
 
     // const arabicNumber = arabicLang.number.toLocaleString('ar-EG');

@@ -9,6 +9,7 @@ const BookmarkSurah = ({surah}) => {
 
     const handleBookmarkSurahDetails = () => {
         navigate(`/surah/${number}`);
+        window.scrollTo(0, 0)
     }
 
     const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;

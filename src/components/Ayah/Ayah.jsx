@@ -15,6 +15,7 @@ const Ayah = () => {
 
     const handleGoBack = () => {
         navigate('/')
+        window.scrollTo(0, 0)
       }
 
     const englishLang = data.data.data[0];
