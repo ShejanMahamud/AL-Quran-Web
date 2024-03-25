@@ -121,8 +121,8 @@ const SurahDetails = () => {
             breakLabel={'...'}
             breakClassName={'break-me'}
             pageCount={Math.ceil(ayahs.length / itemsPerPage)}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={4}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={3}
             onPageChange={handlePageChange}
             containerClassName={'flex justify-center gap-3 items-center font-poppins text-xs'}
             activeClassName={'bg-[#32B7C5] text-white px-3 py-2 rounded-lg font-medium'}

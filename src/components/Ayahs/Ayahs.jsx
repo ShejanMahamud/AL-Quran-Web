@@ -89,7 +89,7 @@ const [modalText, setModalText] = useState(false)
     <div className="bg-[#1C2733] px-10 py-10 mx-auto flex lg:flex-row flex-col gap-10 items-center justify-between rounded-2xl w-[90%] my-5 relative">
       <div className=''>
                  
-        <h1 className='text-base lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider' id='bangla'>{banglaAyah.text}</h1>
+        <h1 className='text-base lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider lg:w-[80%]' id='bangla'>{banglaAyah.text}</h1>
         <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishAyah.text}</span>
         <div className='flex  items-center gap-5 mt-5'>
           <button onClick={handleAudio}>
@@ -143,8 +143,8 @@ const [modalText, setModalText] = useState(false)
   </div>
 
   <div className='my-5 textarea textarea-info flex items-center w-full justify-between'>
-<p>{`https://al-quran-web.netlify.app/ayah/${number}`}</p>
-<button onClick={()=>copyCode(`https://al-quran-web.netlify.app/ayah/${number}`)} ><IoCopy className='text-[#32B7C5] text-xl' /></button>
+<p>{`https://alquran-bangla.netlify.app/ayah/${number}`}</p>
+<button onClick={()=>copyCode(`https://alquran-bangla.netlify.app/ayah/${number}`)} ><IoCopy className='text-[#32B7C5] text-xl' /></button>
 </div>
   <button  className=" bg-[#32B7C5] text-white px-4 py-2 rounded-lg" onClick={()=>setModalText(false)}>Close</button>
   </div>

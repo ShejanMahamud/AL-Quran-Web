@@ -15,7 +15,7 @@ const handleSurahDetails = () => {
         setTimeout(() => {
           setIsLoading(false); // Hide loader
           navigate(`/surah/${surah_id}`);
-        }, 2000);
+        }, 4000);
       };
 
 const {surah_id,surah_name,surah_ayat_number,surah_arabic_name,surah_makki_or_madina,surah_name_meaning} = surah;

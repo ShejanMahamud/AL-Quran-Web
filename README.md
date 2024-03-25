@@ -1,8 +1,13 @@
-# React + Vite
+# Al Quran Bangla Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>আল-কুরআন বাংলা । কুরআন পড়ুন, শুনুন এবং তাফসির দেখুন বাংলায়</p>
 
-Currently, two official plugins are available:
+# Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![TAILWIND CSS](https://img.shields.io/badge/TAILWINDCSS-37B6F1?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Javascript](https://img.shields.io/badge/Javascript-F0DB4F?style=for-the-badge&labelColor=black&logo=javascript&logoColor=F0DB4F)
+![React](https://img.shields.io/badge/REACT-37B6F1?style=for-the-badge&logo=react&logoColor=white)
+
+<br>
