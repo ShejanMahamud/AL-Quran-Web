@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
+import { Helmet } from 'react-helmet-async';
 import { FaBookOpen, FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { IoArrowBackCircle, IoCopy } from "react-icons/io5";
@@ -66,8 +67,8 @@ const Ayah = () => {
   return (
 
     <main>
-            <Helmet>
-        <title>{englishName} | Al-Quran Bangla</title>
+           <Helmet>
+        <title>{`${banglaLang.surah.englishName} | Al-Quran Bangla`}</title>
         <link rel="canonical" href={`https://alquran-bangla.netlify.app/ayah/${ayahNumber}`} />
       </Helmet>
         <div className={`bg-[#1C2733] px-10 py-10 mx-auto flex justify-center flex-col items-center gap-3 rounded-2xl w-[90%] mb-5 ${revelationType === "Meccan" ? "bg-[url('https://i.ibb.co/f9szXvM/makkah-dark.png')]" : "bg-[url('https://i.ibb.co/p3ncHhy/madinah-dark.png')]"} bg-no-repeat bg-left bg-contain`}>
