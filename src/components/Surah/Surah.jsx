@@ -9,6 +9,7 @@ const Surah = ({surah}) => {
 const navigate = useNavigate();
 
 const handleSurahDetails = () => {
+
         setIsLoading(true); // Show loader
     
         // Delay navigation by 2 seconds (2000 milliseconds)
@@ -16,17 +17,14 @@ const handleSurahDetails = () => {
           setIsLoading(false); // Hide loader
           navigate(`/surah/${surah_id}`);
           window.scrollTo(0, 0)
-        }, 4000);
+        }, 5000);
       };
-
-      const scrollToTop = () => {
-        
-    }
 
 const {surah_id,surah_name,surah_ayat_number,surah_arabic_name,surah_makki_or_madina,surah_name_meaning} = surah;
 
   return (
-   <div onClick={()=>{handleSurahDetails()}} className='border border-gray-700 hover:border-[#32B7C5] rounded-xl w-full'>
+   <div onClick={()=>{handleSurahDetails()}} className='border border-gray-700 hover:border-[#32B7C5] text-[#80909f] rounded-xl w-full'>
+        
         {
                 isLoading && <div className='w-full flex justify-center absolute right-0 left-0'>
                 <span className="loading loading-spinner text-info loading-lg"></span>

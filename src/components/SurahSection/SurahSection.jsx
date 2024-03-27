@@ -23,7 +23,7 @@ const SurahSection = ({ handleSurahClick }) => {
                 setTimeout(() => {
                     setSurahs(data);
                     setLoading(false);
-                }, 2000);
+                }, 3000);
             });
     }, []);
 

@@ -37,7 +37,7 @@ const handleNavigateToAyah = (id) => {
 
         <div className='flex items-center justify-between backdrop-blur-lg rounded-lg w-[80%] lg:w-[40%] mx-auto px-5 py-3 shadow-2xl border border-white border-opacity-30'>
             <input type="text" className='bg-transparent focus:outline-none placeholder:text-gray-300 placeholder:text-xs lg:placeholder:text-base' placeholder='Search Surah Number' onChange={getSearchText}/>
-            <Link to={`/surah/${searchText}`}><button><IoSearch /></button></Link>
+            <Link to={`/surah/${searchText}`}><button className='text-[#80909f]'><IoSearch /></button></Link>
         </div>
 
         <div className='text-white font-poppins flex items-center gap-3 w-[80%] mx-auto justify-center'>

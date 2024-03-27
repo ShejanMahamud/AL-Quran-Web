@@ -4,7 +4,7 @@ import { FaBookOpen, FaBookmark, FaPause, FaPlay, FaShareAlt } from "react-icons
 import { GoDotFill } from "react-icons/go";
 import { IoArrowBackCircle, IoCopy } from "react-icons/io5";
 import { LuBox } from "react-icons/lu";
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import { setAyahBookmarkToLocalStorage, setSurahBookmarkToLocalStorage } from '../../Utils/localStorage';
 
@@ -12,7 +12,7 @@ const Ayah = () => {
   
     const data = useLoaderData();
     const navigate = useNavigate();
-
+    const {ayahNumber} = useParams();
     const handleGoBack = () => {
         navigate('/')
         window.scrollTo(0, 0)
@@ -66,6 +66,10 @@ const Ayah = () => {
   return (
 
     <main>
+            <Helmet>
+        <title>{englishName} | Al-Quran Bangla</title>
+        <link rel="canonical" href={`https://alquran-bangla.netlify.app/ayah/${ayahNumber}`} />
+      </Helmet>
         <div className={`bg-[#1C2733] px-10 py-10 mx-auto flex justify-center flex-col items-center gap-3 rounded-2xl w-[90%] mb-5 ${revelationType === "Meccan" ? "bg-[url('https://i.ibb.co/f9szXvM/makkah-dark.png')]" : "bg-[url('https://i.ibb.co/p3ncHhy/madinah-dark.png')]"} bg-no-repeat bg-left bg-contain`}>
         <h1 className='text-3xl font-noto-naskh-arabic text-white'>{banglaLang.surah.name}</h1>
         <div className='mb-3'>

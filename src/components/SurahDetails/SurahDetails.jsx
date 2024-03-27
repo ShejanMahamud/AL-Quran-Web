@@ -1,5 +1,6 @@
 import { default as React, useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
+import { Helmet } from 'react-helmet-async';
 import { FaBookmark, FaPause, FaPlay } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { IoArrowBackCircle } from "react-icons/io5";
@@ -10,7 +11,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
 import Ayahs from '../Ayahs/Ayahs';
-
 
 const SurahDetails = () => {
   const [isPlaying, setIsPlaying] = useState(null);
@@ -72,6 +72,10 @@ const SurahDetails = () => {
 
   return (
     <main className='h-auto w-full mb-5' id='ontop'>
+      <Helmet>
+        <title>{englishName} | Al-Quran Bangla</title>
+        <link rel="canonical" href={`https://alquran-bangla.netlify.app/surah/${number}`} />
+      </Helmet>
       <div className='w-full grid grid-cols-1 row-auto items-start -mt-5'>
       <div className={`bg-[#1C2733] px-10 py-10 mx-auto flex justify-center flex-col items-center gap-3 rounded-2xl w-[90%] mb-5 ${revelationType === "Meccan" ? "bg-[url('https://i.ibb.co/f9szXvM/makkah-dark.png')]" : "bg-[url('https://i.ibb.co/p3ncHhy/madinah-dark.png')]"} bg-no-repeat bg-left bg-contain`}>
         <h1 className='text-3xl font-noto-naskh-arabic text-white'>{name}</h1>

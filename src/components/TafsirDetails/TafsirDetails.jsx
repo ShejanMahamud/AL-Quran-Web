@@ -1,11 +1,12 @@
 import { default as React, useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
+import { Helmet } from 'react-helmet-async';
 import { FaBookmark, FaFacebookF, FaPause, FaPlay, FaShareAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 import { IoArrowBackCircle, IoCopy } from "react-icons/io5";
 import { LuBox } from "react-icons/lu";
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import {
   FacebookShareButton,
   TelegramShareButton,
@@ -26,6 +27,8 @@ const TafsirDetails = () => {
     const audioRef = useRef(null);
 
     const data = useLoaderData();
+
+    const {ayahNumber, surahNumber} = useParams();
 
     const surahDetails = data.surah.data;
 
@@ -72,6 +75,10 @@ const TafsirDetails = () => {
 
   return (
       <div className='w-full grid grid-cols-1 row-auto items-start -mt-5 pb-5'>
+        <Helmet>
+          <title>Tafsir | {englishName} | Al-Quran Bangla</title>
+          <link rel="canonical" href={`http://alquran-bangla.netlify.app/tafsir/${surahNumber}/${ayahNumber}`} />
+        </Helmet>
       <div className={`bg-[#1C2733] px-10 py-10 mx-auto flex justify-center flex-col items-center gap-3 rounded-2xl w-[90%] mb-5 ${revelationType === "Meccan" ? "bg-[url('https://i.ibb.co/f9szXvM/makkah-dark.png')]" : "bg-[url('https://i.ibb.co/p3ncHhy/madinah-dark.png')]"} bg-no-repeat bg-left bg-contain`}>
         <h1 className='text-3xl font-noto-naskh-arabic text-white'>{name}</h1>
         <div className='mb-3 text-center'>
