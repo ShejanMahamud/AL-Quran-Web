@@ -10,16 +10,39 @@ import Ayah from "./components/Ayah/Ayah";
 import AyahApp from "./components/AyahApp/AyahApp";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 import SurahApp from "./components/SurahApp/SurahApp";
 import SurahDetails from "./components/SurahDetails/SurahDetails";
 import TafsirApp from "./components/TafsirApp/TafsirApp";
 import TafsirDetails from "./components/TafsirDetails/TafsirDetails";
+import UserApp from "./components/UserApp/UserApp";
 import './index.css';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
+    errorElement: <ErrorPage></ErrorPage>
+  },
+  {
+    path: '/user',
+    element: <UserApp/>,
+    children: [
+      {
+        path: '/user/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/user/register',
+        element: <Register/>
+      },
+      {
+        path: '/user/reset-password',
+        element: <ResetPassword/>
+      }
+    ],
     errorElement: <ErrorPage></ErrorPage>
   },
   {
