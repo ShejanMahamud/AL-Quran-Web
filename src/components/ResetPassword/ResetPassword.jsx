@@ -1,5 +1,6 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import React from "react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase/firebase.config";
@@ -32,9 +33,9 @@ if(!emailRegex.test(email)){
           <h1 className="mb-3 text-xl font-bold text-white uppercase tracking-wider">
             Reset Password
           </h1>
-          {/* <p className="mb-3 text-gray-500 font-medium text-sm">
-          Already User? Login <Link className="underline text-[#32B7C5] font-bold" to={'/user/login'}>Here</Link>
-          </p> */}
+          <p className="mb-3 text-gray-500 font-medium text-sm">
+          Or go back to <Link className="underline text-[#32B7C5] font-bold" to={'/user/login'}>Login</Link>
+          </p>
 
           <form
             onSubmit={handleForm}

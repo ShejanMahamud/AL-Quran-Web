@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
+import { FaUserPen } from "react-icons/fa6";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,6 +18,8 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const checked = e.target.terms.checked;
+    const name = e.target.name.value;
+
     if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password)) {
       toast.error("Password Must Contain Uppercase & LowerCase");
       return;
@@ -31,20 +34,25 @@ const Register = () => {
       .then((res) => {
         sendEmailVerification(res.user)
         .then(res => {
-            toast.success("Sucessfully Registered");
-            setTimeout(()=>{
-                navigate('/user/login')
-            },5000);
+            updateProfile(auth.currentUser, {
+                displayName: name
+            })
+            .then(res => {
+                toast.success("Sucessfully Registered");
+                setTimeout(()=>{
+                    navigate('/user/login')
+                },5000);
+                
+            })
+            .catch(error => {
+                toast.error("Already User! Please Login")
+            })
         })
-        .catch(error => {
-            toast.error("Already User! Please Login")
-        })
-        
+        console.log(res.user)
       })
       
     e.target.password.value = "";
     e.target.email.value = "";
-    console.log(checked);
   };
 
   return (
@@ -80,6 +88,18 @@ const Register = () => {
                 required
               />
             </label>
+
+            <label className="input input-bordered flex items-center gap-2 bg-transparent w-full backdrop-blur-lg focus:outline-none">
+            <FaUserPen />
+              <input
+                type="text"
+                name="name"
+                className="grow focus:outline-none w-full"
+                placeholder="Display Name"
+                required
+              />
+            </label>
+
             <label className="input input-bordered flex items-center gap-2 bg-transparent backdrop-blur-lg w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

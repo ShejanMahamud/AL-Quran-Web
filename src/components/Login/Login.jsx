@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -17,7 +17,14 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        toast.success("Sucessfully Logged in");
+        if(res.user.emailVerified){
+          toast.success("Sucessfully Logged in");
+        }else{
+          sendEmailVerification(auth.currentUser)
+          .then(res => {
+            toast.warning('Please verify email first!')
+          })
+        }
       })
       .catch((error) => toast.error(error.message));
     e.target.password.value = "";
