@@ -1,41 +1,15 @@
-import { sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import auth from "../../firebase/firebase.config";
-import { GoogleLoginContext } from "../UserApp/UserApp";
+import { AuthContext } from "../Home/Home";
+
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
-  const handleGoogleLogin = useContext(GoogleLoginContext)
-  const handleForm = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        if(res.user.emailVerified){
-          toast.success("Sucessfully Logged in");
-          setTimeout(()=>{
-            navigate('/')
-          },1000)
-        }else{
-          sendEmailVerification(auth.currentUser)
-          .then(res => {
-            toast.warning('Please verify email first!')
-          })
-        }
-      })
-      .catch((error) => toast.error(error.message));
-    e.target.password.value = "";
-    e.target.email.value = "";
-  };
-
+  const {handleGoogleLogin,handleForm} = useContext(AuthContext)
+ 
   return (
     <div className="w-full bg-[url('arabic.svg')] py-20">
       <div className="w-full min-h-screen mx-auto flex flex-col gap-5 items-center justify-center">
@@ -114,7 +88,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer></ToastContainer>
     </div>
   );
 };

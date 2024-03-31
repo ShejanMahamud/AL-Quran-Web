@@ -7,11 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase/firebase.config";
-import { GoogleLoginContext } from "../UserApp/UserApp";
+import { AuthContext } from "../Home/Home";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-    const handleGoogleLogin = useContext(GoogleLoginContext)
+  const {handleGoogleLogin} = useContext(AuthContext)
   const navigate = useNavigate();
 
   const handleForm = (e) => {
@@ -49,7 +49,7 @@ const Register = () => {
                 toast.error("Already User! Please Login")
             })
         })
-        console.log(res.user)
+
       })
       
     e.target.password.value = "";

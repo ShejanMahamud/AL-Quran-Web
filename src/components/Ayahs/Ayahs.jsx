@@ -1,5 +1,7 @@
+import { onAuthStateChanged } from 'firebase/auth';
 import React, { useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
+import toast, { Toaster } from 'react-hot-toast';
 import { FaBookOpen, FaBookmark, FaFacebookF, FaPause, FaPlay, FaShareAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoCopy } from "react-icons/io5";
@@ -10,10 +12,9 @@ import {
   TwitterShareButton,
   WhatsappShareButton
 } from "react-share";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from 'react-tooltip';
 import { getBookMarkAyahFromLocalStorage } from '../../Utils/localStorage';
+import auth from '../../firebase/firebase.config';
 
 
 const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
@@ -53,7 +54,10 @@ const [modalText, setModalText] = useState(false)
   };
 
   const setAyahBookmarkToLocalStorage = (ayahId) => {
-    let BookmarkAyahInLocalStorage = getBookMarkAyahFromLocalStorage();
+
+    onAuthStateChanged(auth,user => {
+      if(user){
+        let BookmarkAyahInLocalStorage = getBookMarkAyahFromLocalStorage();
     if(!BookmarkAyahInLocalStorage.includes(ayahId)){
         BookmarkAyahInLocalStorage.push(ayahId);
         const strBookmarkAyah = JSON.stringify(BookmarkAyahInLocalStorage);
@@ -62,6 +66,15 @@ const [modalText, setModalText] = useState(false)
     }else{
         toast.error('Already Saved!')
     }
+      }else{
+          toast.error('Please Login First!');
+          setTimeout(()=>{
+            window.scroll(0,0)
+            navigate('/user/login')
+          },2000)
+        }
+    })
+
   }
 
   const copyCode = (text) => {
@@ -175,7 +188,7 @@ const [modalText, setModalText] = useState(false)
       <Tooltip id="tafsir" />
       <Tooltip id="share" />
       <Tooltip id="back" />
-      <ToastContainer></ToastContainer>
+      <Toaster/>
     </div>
   );
 }

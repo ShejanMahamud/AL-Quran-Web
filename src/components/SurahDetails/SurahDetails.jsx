@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from 'firebase/auth';
 import { default as React, useRef, useState } from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import { Helmet } from 'react-helmet-async';
@@ -7,10 +8,11 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { LuBox } from "react-icons/lu";
 import ReactPaginate from 'react-paginate';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getBookMarkSurahFromLocalStorage } from '../../Utils/localStorage';
+import auth from '../../firebase/firebase.config';
 import Ayahs from '../Ayahs/Ayahs';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SurahDetails = () => {
   const [isPlaying, setIsPlaying] = useState(null);
@@ -59,15 +61,26 @@ const SurahDetails = () => {
   }
 
   const setSurahBookmarkToLocalStorage = (surahId) => {
-    let BookmarkSurahInLocalStorage = getBookMarkSurahFromLocalStorage();
-    if(!BookmarkSurahInLocalStorage.includes(surahId)){
-        BookmarkSurahInLocalStorage.push(surahId);
-        toast.success('Saved Surah!') 
-    }else{
-      toast.error('Already Saved')
-    }
-    const strBookmarkSurah = JSON.stringify(BookmarkSurahInLocalStorage);
-    localStorage.setItem('surah-id', strBookmarkSurah);
+
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        let BookmarkSurahInLocalStorage = getBookMarkSurahFromLocalStorage();
+        if(!BookmarkSurahInLocalStorage.includes(surahId)){
+            BookmarkSurahInLocalStorage.push(surahId);
+            toast.success('Saved Surah!') 
+        }else{
+          toast.error('Already Saved')
+        }
+        const strBookmarkSurah = JSON.stringify(BookmarkSurahInLocalStorage);
+        localStorage.setItem('surah-id', strBookmarkSurah);
+      }else{
+        toast.error('Please Login First!');
+        setTimeout(()=>{
+          window.scroll(0,0)
+          navigate('/user/login')
+        },2000)
+      }
+    })
 }
 
   return (
@@ -139,7 +152,7 @@ const SurahDetails = () => {
         </div>
       </div>
       {audio && <audio ref={audioRef} src={audio} onEnded={handleAudioEnd} />}
-      <ToastContainer></ToastContainer>
+      <Toaster/>
     </main>
   );
 }

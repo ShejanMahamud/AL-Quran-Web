@@ -1,30 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Home/Home';
 
 const Navbar = () => {
 
-const [theme, setTheme] = useState('dark');
-
-const handleThemeSwitch = (e) => {
-  if(e.target.checked){
-    setTheme('light')
-  }else{
-    setTheme('dark')
-  }
-}
+  const {userInfo,handleSignOut} = useContext(AuthContext)
 
 const navigate = useNavigate();
 
 const handleNavigate = () => {
   navigate(`/`)
 }
-
-// useEffect(()=>{
-//   localStorage.setItem('theme',theme);
-//   const savedTheme = localStorage.getItem('theme');
-//   document.querySelector('html').setAttribute('data-theme',savedTheme);
-// },[theme])
 
   return (
     <div>
@@ -38,24 +26,35 @@ const handleNavigate = () => {
             <span className='text-xs font-mukti'>কুরআন বাংলা</span>
             </div>
         </div>
-        {/* <ul>
-          <NavLink to="/"><li>Home</li></NavLink>
-        </ul> */}
-        {/* <label class="flex cursor-pointer gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#80909f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-  <input type="checkbox" class="toggle theme-controller z-50 tooltip" data-tip="Light Mode Soon.."/>
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#80909f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-</label> */}
 
-<button onClick={() => navigate('/user/login')} className='bg-[#32B7C5] px-4 py-2 rounded-lg text-white flex items-center gap-2'>
-<FaUser /> Login
-</button>
+{
+  userInfo 
+  ? 
+  <div className="dropdown dropdown-end">
+  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+    <div className="w-10 rounded-full">
+      <img alt="" src={userInfo?.photoURL || 'user.png'} />
+    </div>
+  </div>
+  <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+    <li>
+      <a className="justify-between">
+        {userInfo?.displayName || 'User'}
+        {/* <span className="badge">New</span> */}
+      </a>
+    </li>
+    <li><a>{userInfo?.email || 'No Email'}</a></li>
+    <li onClick={handleSignOut}><a>Logout</a></li>
+  </ul>
+</div>
+   : 
+    <button onClick={() => navigate('/user/login')} className='bg-[#32B7C5] px-4 py-2 rounded-lg text-white flex items-center gap-2'>
+    <FaUser /> Login
+    </button>
+}
+
     </nav>
-    {/* <nav className={`w-full mx-auto shadow-2xl py-3 font-k2d flex items-center justify-between px-5 lg:px-20 fixed bottom-0 backdrop-blur-2xl z-50`}>
-        <div className='flex items-center gap-2'>
-        <GoHomeFill className='text-[#32B7C5] text-3xl'/>
-        </div>
-    </nav> */}
+    <Toaster/>
     </div>
   )
 }
