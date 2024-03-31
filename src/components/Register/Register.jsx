@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaUserPen } from "react-icons/fa6";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -7,10 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase/firebase.config";
+import { GoogleLoginContext } from "../UserApp/UserApp";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-
+    const handleGoogleLogin = useContext(GoogleLoginContext)
   const navigate = useNavigate();
 
   const handleForm = (e) => {
@@ -143,10 +144,10 @@ const Register = () => {
           </form>
 
           <div className="flex items-center justify-center w-full gap-5 mt-5">
-            <button className="bg-white rounded-lg px-2 py-2 text-2xl">
+            <button onClick={handleGoogleLogin} className="bg-white rounded-lg px-2 py-2 text-2xl">
               <FcGoogle />
             </button>
-            <button className="bg-white rounded-lg px-2 py-2 text-2xl">
+            <button onClick={()=>navigate('/user/phone-verification')} className="bg-white rounded-lg px-2 py-2 text-2xl">
               <FcIphone />
             </button>
           </div>

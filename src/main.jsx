@@ -11,6 +11,7 @@ import AyahApp from "./components/AyahApp/AyahApp";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
+import PhoneVerification from "./components/PhoneVerification/PhoneVerification";
 import Register from "./components/Register/Register";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import SurahApp from "./components/SurahApp/SurahApp";
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/user/reset-password',
         element: <ResetPassword/>
+      },
+      {
+        path: '/user/phone-verification',
+        element: <PhoneVerification/>
       }
     ],
     errorElement: <ErrorPage></ErrorPage>
