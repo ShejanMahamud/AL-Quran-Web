@@ -1,19 +1,77 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { FaXTwitter } from "react-icons/fa6";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from "../Home/Home";
-
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
-  const {handleGoogleLogin,handleForm} = useContext(AuthContext)
+  const {userInfo,loginUser,loginWithGoogle,loginWithTwitter} = useContext(AuthContext)
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    loginUser(email, password)
+      .then((res) => {
+        if (res.user.emailVerified) {
+          toast.success("Sucessfully Logged in");
+          e.target.reset();
+          setTimeout(() => {
+            navigate('/')
+          }, 1000);
+        } else {
+          sendEmailVerification(auth.currentUser).then((res) => {
+            toast.error("Please verify email first!");
+          });
+        }
+      })
+      .catch((error) => toast.error(error.message));
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await loginWithGoogle();
+      toast.success(`Successfully Logged in! ${res.user.displayName}`);
+      setTimeout(() => {
+        navigate('/');
+      }, 5000);
+    } catch (error) {
+      toast.error("Unexpected Request!");
+    }
+  };
+  
+  
+
+  const handleTwitterLogin = () => {
+    loginWithTwitter()
+      .then((res) => {
+        toast.success(`Successfully Logged in! ${res.user.displayName}`);
+        setTimeout(() => {
+         navigate('/');
+        }, 2000);
+      })
+      .catch((error) => {
+        // toast.error("Unexpected Request!");
+        console.log(error.message)
+      });
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/') 
+    }
+  }, [userInfo]);
  
   return (
     <div className="w-full bg-[url('arabic.svg')] py-20">
       <div className="w-full min-h-screen mx-auto flex flex-col gap-5 items-center justify-center">
-        <div className="w-[40%] mx-auto">
+        <div className="lg:w-[40%] w-[90%] mx-auto">
           <h1 className="mb-3 text-2xl font-bold text-white uppercase tracking-wider">
             Login
           </h1>
@@ -85,9 +143,13 @@ const Login = () => {
             <button onClick={()=>navigate('/user/phone-verification')} className="bg-white rounded-lg px-2 py-2 text-2xl">
               <FcIphone />
             </button>
+            <button onClick={handleTwitterLogin} className="bg-white rounded-lg px-2 py-2 text-2xl text-[#32B7C5]">
+              <FaXTwitter />
+            </button>
           </div>
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 };

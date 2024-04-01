@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .opt-container {
-  @apply flex justify-between gap-5 w-[60%];
+  @apply flex justify-center lg:gap-5 gap-2 w-[60%] mx-auto;
 }
 .opt-container input {
   @apply !mr-0 flex-1 py-5 outline-none bg-transparent backdrop-blur-lg border border-[#32B7C5] rounded-lg;

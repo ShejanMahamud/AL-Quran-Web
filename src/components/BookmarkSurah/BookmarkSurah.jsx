@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoDotFill } from "react-icons/go";
 import { LuBox } from "react-icons/lu";
 import { useNavigate } from 'react-router-dom';
 
 const BookmarkSurah = ({surah}) => {
-
+    const [loading,setLoading] = useState(false)
     const navigate = useNavigate();
-
-    const handleBookmarkSurahDetails = () => {
-        navigate(`/surah/${number}`);
-        window.scrollTo(0, 0)
-    }
 
     const {name,englishName,revelationType,englishNameTranslation,number,numberOfAyahs} = surah;
 
+    const handleBookmarkSurahDetails = () => {
+      setLoading(true);
+      setTimeout(()=>{
+      navigate(`/surah/${number}`);
+      window.scrollTo(0, 0)
+      },2000)
+  }
+
   return (
-    <div onClick={handleBookmarkSurahDetails} className='border border-gray-700 rounded-xl w-full hover:border-[#32B7C5]'>
+
+    
+    <div onClick={handleBookmarkSurahDetails} className="border border-gray-700 bg-[url('arabic.svg')] bg-[#121C26] bg-no-repeat bg-cover bg-center rounded-xl w-full hover:border-[#32B7C5] relative">
+      {
+        loading &&  <span className="loading loading-spinner loading-lg text-info absolute right-0 top-10"></span>
+      }
 <div className='group hover:bg-[#32B7C5] hover:bg-opacity-5 w-full flex items-center gap-5 px-5 py-5 rounded-xl'>
 <div className=" flex items-center justify-center font-poppins">
         <div className=''>

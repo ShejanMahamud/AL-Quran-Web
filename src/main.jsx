@@ -6,11 +6,17 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import AuthProvider from "./components/AuthProvider/AuthProvider";
 import Ayah from "./components/Ayah/Ayah";
+import Dashboard from "./components/Dashboard/Dashboard";
+import DashboardHome from './components/Dashboard/DashboardHome';
+import DashBoardSurah from "./components/Dashboard/DashBoardSurah";
+import Profile from "./components/Dashboard/Profile";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import PhoneVerification from "./components/PhoneVerification/PhoneVerification";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Register from "./components/Register/Register";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import SurahDetails from "./components/SurahDetails/SurahDetails";
@@ -88,7 +94,21 @@ const router = createBrowserRouter([
           },
           {
             path: '/user/dashboard',
-            element: <PhoneVerification/>
+            children: [
+              {
+                path: '/user/dashboard',
+                element: <PrivateRoute><DashboardHome/></PrivateRoute>
+              },
+              {
+                path: '/user/dashboard/surah',
+                element: <PrivateRoute><DashBoardSurah/></PrivateRoute>
+              },
+              {
+                path: '/user/dashboard/profile',
+                element: <PrivateRoute><Profile/></PrivateRoute>
+              }
+            ],
+            element: <PrivateRoute><Dashboard/></PrivateRoute>
           }
     ],
     errorElement: <ErrorPage></ErrorPage>
@@ -98,7 +118,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
-    <RouterProvider router={router} />
+    <AuthProvider>
+    <RouterProvider router={router}/>
+    </AuthProvider>
     </HelmetProvider>
   </React.StrictMode>
 );

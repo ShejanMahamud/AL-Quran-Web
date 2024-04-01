@@ -33,6 +33,7 @@
     "react-toastify": "^10.0.5",
     "react-tooltip": "^5.26.3",
     "react-topbar-progress-indicator": "^4.1.1",
+    "recharts": "^2.12.3",
     "reoverlay": "^1.0.3",
     "sort-by": "^1.2.0",
     "swiper": "^11.0.7"

@@ -1,17 +1,17 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import React, { useContext, useState } from "react";
-import { FaUserPen } from "react-icons/fa6";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { FaUserPen, FaXTwitter } from "react-icons/fa6";
 import { FcGoogle, FcIphone } from "react-icons/fc";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "../../firebase/firebase.config";
-import { AuthContext } from "../Home/Home";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const {handleGoogleLogin} = useContext(AuthContext)
+  const {userCreate,loginWithGoogle,userInfo,loginWithTwitter} = useContext(AuthContext)
   const navigate = useNavigate();
 
   const handleForm = (e) => {
@@ -31,7 +31,7 @@ const Register = () => {
       toast.error("Please accept our terms");
       return;
     }
-    createUserWithEmailAndPassword(auth, email, password)
+    userCreate(email, password)
       .then((res) => {
         sendEmailVerification(res.user)
         .then(res => {
@@ -56,10 +56,42 @@ const Register = () => {
     e.target.email.value = "";
   };
 
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then((res) => {
+        toast.success(`Successfully Logged in! ${res.user.displayName}`);
+        setTimeout(() => {
+         navigate('/');
+        }, 2000);
+      })
+      .catch((error) => {
+        toast.error("Unexpected Request!");
+      });
+  };
+
+  const handleTwitterLogin = () => {
+    loginWithTwitter()
+      .then((res) => {
+        toast.success(`Successfully Logged in! ${res.user.displayName}`);
+        setTimeout(() => {
+         navigate('/');
+        }, 2000);
+      })
+      .catch((error) => {
+        toast.error("Unexpected Request!");
+      });
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/') 
+    }
+  }, [userInfo]);
+
   return (
     <div className="w-full bg-[url('arabic.svg')] py-20">
       <div className="w-full min-h-screen mx-auto flex flex-col gap-5 items-center justify-center">
-        <div className="w-[40%] mx-auto">
+        <div className="lg:w-[40%] w-[90%] mx-auto">
           <h1 className="mb-3 text-2xl font-bold text-white uppercase tracking-wider">
             Register
           </h1>
@@ -149,6 +181,9 @@ const Register = () => {
             </button>
             <button onClick={()=>navigate('/user/phone-verification')} className="bg-white rounded-lg px-2 py-2 text-2xl">
               <FcIphone />
+            </button>
+            <button onClick={handleTwitterLogin} className="bg-white rounded-lg px-2 py-2 text-2xl text-[#32B7C5]">
+              <FaXTwitter />
             </button>
           </div>
         </div>
