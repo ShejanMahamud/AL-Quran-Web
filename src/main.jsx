@@ -96,6 +96,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/user/bookmark_surah',
+            loader: ()=> axios.get(`http://localhost:5947/surahs`),
             element: <PrivateRoute><BookmarkSurah></BookmarkSurah></PrivateRoute>
           }
     ],

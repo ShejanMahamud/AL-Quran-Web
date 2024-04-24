@@ -18,7 +18,6 @@ const SurahDetails = () => {
   const navigate = useNavigate();
   const data = useLoaderData();
   const audio = data.audio.audio_file.audio_url;
-  const englishLang = data.surah.data[0];
   const banglaLang = data.surah.data[1];
   const { number, name, englishName, englishNameTranslation, revelationType, numberOfAyahs, ayahs, edition } = data.surah.data[2];
   const {user} = useAuth() || {};
@@ -119,7 +118,6 @@ const SurahDetails = () => {
               arbiAyah={ayah}
               surahNumber={number}
               banglaAyah={banglaLang.ayahs.find(banglaAyah => banglaAyah.number === ayah.number)}
-              englishAyah={englishLang.ayahs.find(englishAyah => englishAyah.number === ayah.number)}
             />
           ))}
           <ReactPaginate

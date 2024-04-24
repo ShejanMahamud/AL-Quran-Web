@@ -13,7 +13,7 @@ import {
 import { Tooltip } from 'react-tooltip';
 
 
-const Ayahs = ({ arbiAyah, banglaAyah, englishAyah,surahNumber }) => {
+const Ayahs = ({ arbiAyah, banglaAyah,surahNumber }) => {
 const [modalText, setModalText] = useState(false)
 
   const { number, text, audio,numberInSurah } = arbiAyah;
@@ -76,7 +76,7 @@ const [modalText, setModalText] = useState(false)
       <div className=''>
                  
         <h1 className='text-base lg:text-xl font-medium text-white mb-3 font-mukti tracking-wider lg:w-[80%]' id='bangla'>{banglaAyah.text}</h1>
-        <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishAyah.text}</span>
+        {/* <span className='font-normal text-xs lg:text-sm text-[#80909f]'>{englishAyah.text}</span> */}
         <div className='flex  items-center gap-5 mt-5'>
           <button onClick={handleAudio}>
             {isPlaying ? (

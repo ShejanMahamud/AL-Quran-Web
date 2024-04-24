@@ -21,7 +21,7 @@ const handleSurahDetails = () => {
       };
 
   return (
-   <div onClick={()=>{handleSurahDetails()}} className='border border-gray-700 hover:border-[#32B7C5] text-[#80909f] rounded-xl w-full'>
+   <div onClick={()=>{handleSurahDetails()}} className='border border-gray-700 hover:border-[#32B7C5] text-[#80909f] rounded-xl w-full backdrop-blur-md'>
         
         {
                 isLoading && <div className='w-full flex justify-center absolute right-0 left-0'>
