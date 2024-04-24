@@ -12,7 +12,7 @@ const location = useLocation();
     return children;
   }
   else{
-    return <Navigate to='/login' state={location?.pathname || '/'}/>
+    return <Navigate to='/user/login' state={location?.pathname || '/'}/>
   }
 
 }

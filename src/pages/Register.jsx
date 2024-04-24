@@ -1,5 +1,6 @@
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import toast from "react-hot-toast";
 import { FaUserPen } from "react-icons/fa6";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -10,6 +11,7 @@ import useAuth from "../hooks/useAuth";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
+  const recaptcha = useRef(null);
   const {userCreate,setUpdateUser} = useAuth() || {};
   const location = useLocation() ;
   const from = location?.state || '/'
@@ -22,6 +24,10 @@ const Register = () => {
     const password = e.target.password.value;
     const checked = e.target.terms.checked;
     const name = e.target.name.value;
+    if(!recaptcha.current.getValue()){
+      toast.error('Please Submit Captcha');
+      return;
+    }
 
     if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password)) {
       toast.error("Password Must Contain Uppercase & LowerCase");
@@ -150,6 +156,7 @@ const Register = () => {
               />
               <span>Accept our terms and conditions</span>
             </label>
+            <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha}/>
             <button
               type="submit"
               className="bg-[#32B7C5] px-4 py-2 rounded-lg text-white w-full"

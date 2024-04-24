@@ -17,7 +17,8 @@ const showHeader = [
     "/user/register",
     "/user/reset-password",
     "/user/phone-verification",
-    "/profile"
+    "/user/profile",
+    "/user/bookmark_surah"
   ].includes(location.pathname);
 
   return (

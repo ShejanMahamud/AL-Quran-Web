@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Ayah from "./components/Ayah";
 import './index.css';
+import BookmarkSurah from "./pages/BookmarkSurah";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -90,8 +91,12 @@ const router = createBrowserRouter([
             element: <PhoneVerification/>
           },
           {
-            path: '/profile',
+            path: '/user/profile',
             element: <PrivateRoute><Profile></Profile></PrivateRoute>
+          },
+          {
+            path: '/user/bookmark_surah',
+            element: <PrivateRoute><BookmarkSurah></BookmarkSurah></PrivateRoute>
           }
     ],
     errorElement: <ErrorPage></ErrorPage>

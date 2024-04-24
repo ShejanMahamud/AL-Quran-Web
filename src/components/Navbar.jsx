@@ -48,18 +48,19 @@ const Navbar = () => {
   </div>
   <ul tabIndex={0} className="mt-3 z-[1] relative top-10 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
   <li className="font-bold py-2 px-4">Hi! {user?.displayName || "User"}</li>
-            <button onClick={() => navigate("/profile")} className="flex items-center gap-2 font-medium hover:bg-gray-200 hover:text-gray-800 py-2 px-4 hover:rounded-lg">
+            <button onClick={() => navigate("/user/profile")} className="flex items-center gap-2 font-medium hover:bg-gray-200 hover:text-gray-800 py-2 px-4 hover:rounded-lg">
               <FaUserCircle className="text-xl text-gray-400" />
               <span>Profile</span>
             </button>
             <button
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/user/profile")}
               className="flex items-center gap-2 font-medium hover:bg-gray-200 py-2 px-4 hover:rounded-lg hover:text-gray-800"
             >
               <IoSettingsOutline className="text-xl" />
               <span>Settings</span>
             </button>
             <button
+            onClick={()=>navigate('/user/bookmark_surah')}
               className="flex items-center gap-2 font-medium hover:bg-gray-200 py-2 px-4 hover:rounded-lg hover:text-gray-800"
             >
               <FaRegBookmark className="text-xl" />

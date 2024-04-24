@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import toast from "react-hot-toast";
 import { FaXTwitter } from "react-icons/fa6";
 import { FcGoogle, FcIphone } from "react-icons/fc";
@@ -8,6 +9,8 @@ import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
+  const recaptcha = useRef(null);
+  const inputRef = useRef(null);
   const [showPass, setShowPass] = useState(false);
   const {user,loginUser,loginWithGoogle,loginWithTwitter} = useAuth() || {};
   const location = useLocation()
@@ -17,6 +20,10 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    if(!recaptcha.current.getValue()){
+      toast.error('Please Submit Captcha');
+      return;
+    }
     loginUser(email, password)
       .then((res) => {
         toast.success("Sucessfully Logged in");
@@ -54,6 +61,9 @@ const Login = () => {
       });
   };
 
+  useEffect(()=>{
+    inputRef.current.focus();
+  },[])
  
   return (
     <div className="w-full bg-[url('arabic.svg')] py-20">
@@ -86,6 +96,7 @@ const Login = () => {
                 className="grow focus:outline-none w-full"
                 placeholder="Email"
                 required
+                ref={inputRef}
               />
             </label>
             <label className="input input-bordered flex items-center gap-2 bg-transparent backdrop-blur-lg w-full">
@@ -115,6 +126,7 @@ const Login = () => {
             <p className=" text-gray-500 font-medium text-sm">
               <Link className="hover:underline text-[#32B7C5]" to={'/user/reset-password'}>Forget Password?</Link>
           </p>
+          <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha}/>
             <button
               type="submit"
               className="bg-[#32B7C5] px-4 py-2 rounded-lg text-white w-full"
