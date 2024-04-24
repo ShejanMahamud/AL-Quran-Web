@@ -6,32 +6,29 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import AuthProvider from "./components/AuthProvider/AuthProvider";
-import Ayah from "./components/Ayah/Ayah";
-import Dashboard from "./components/Dashboard/Dashboard";
-import DashboardHome from './components/Dashboard/DashboardHome';
-import DashBoardSurah from "./components/Dashboard/DashBoardSurah";
-import Profile from "./components/Dashboard/Profile";
-import ErrorPage from "./components/ErrorPage/ErrorPage";
-import Home from "./components/Home/Home";
-import Login from "./components/Login/Login";
-import PhoneVerification from "./components/PhoneVerification/PhoneVerification";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Register from "./components/Register/Register";
-import ResetPassword from "./components/ResetPassword/ResetPassword";
-import SurahDetails from "./components/SurahDetails/SurahDetails";
-import SurahSection from './components/SurahSection/SurahSection';
-import TafsirDetails from "./components/TafsirDetails/TafsirDetails";
+import Ayah from "./components/Ayah";
 import './index.css';
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import PhoneVerification from "./pages/PhoneVerification";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
+import SurahDetails from "./pages/SurahDetails";
+import TafsirDetails from "./pages/TafsirDetails";
+import PrivateRoute from './private/PrivateRoute';
+import AuthProvider from "./providers/AuthProvider";
+import Root from "./Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <Root></Root>,
     children: [
       {
         path: '/',
-        element: <SurahSection/>
+        element: <Home/>
       },
       {
         path: '/surah/:surahNumber',
@@ -93,22 +90,8 @@ const router = createBrowserRouter([
             element: <PhoneVerification/>
           },
           {
-            path: '/user/dashboard',
-            children: [
-              {
-                path: '/user/dashboard',
-                element: <PrivateRoute><DashboardHome/></PrivateRoute>
-              },
-              {
-                path: '/user/dashboard/surah',
-                element: <PrivateRoute><DashBoardSurah/></PrivateRoute>
-              },
-              {
-                path: '/user/dashboard/profile',
-                element: <PrivateRoute><Profile/></PrivateRoute>
-              }
-            ],
-            element: <PrivateRoute><Dashboard/></PrivateRoute>
+            path: '/profile',
+            element: <PrivateRoute><Profile></Profile></PrivateRoute>
           }
     ],
     errorElement: <ErrorPage></ErrorPage>

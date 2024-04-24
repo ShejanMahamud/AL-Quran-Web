@@ -4,15 +4,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD7fRQgDr0tRrvyjC-n1ntrw-bqaUUdYFY",
-  authDomain: "al-quran-web.firebaseapp.com",
-  projectId: "al-quran-web",
-  storageBucket: "al-quran-web.appspot.com",
-  messagingSenderId: "526756770143",
-  appId: "1:526756770143:web:3e02994f8930bdbdca46ea",
-  measurementId: "G-MCBXBQ5Y5L"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
-
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
